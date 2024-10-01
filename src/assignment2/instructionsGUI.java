@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -28,9 +27,9 @@ public class instructionsGUI
 {
     public static void main(String[] args) 
     {
-      SwingUtilities.invokeLater(() -> createGUI());  
+      SwingUtilities.invokeLater(() -> createInstructGUI());  
     }
-    public static void createGUI()
+    public static void createInstructGUI()
     {
         //Creating frame
         JFrame frame = new JFrame("Instructions");
@@ -51,7 +50,7 @@ public class instructionsGUI
         
         //Area for instructions
         JTextArea instruct = new JTextArea();
-        instruct.setFont(new Font("Arial", Font.PLAIN, 18));
+        instruct.setFont(new Font("Broadway", Font.PLAIN, 18));
         instruct.setForeground(Color.YELLOW);
         instruct.setBackground(Color.BLACK);
         instruct.setLineWrap(true);
