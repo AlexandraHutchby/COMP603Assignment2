@@ -31,6 +31,7 @@ public class instructionsGUI
     }
     public static void createInstructGUI()
     {
+        Color gold = new Color(255, 215, 0);
         //Creating frame
         JFrame frame = new JFrame("Instructions");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,14 +45,14 @@ public class instructionsGUI
         
         //Creating heading
         JLabel header = new JLabel("How to play:", SwingConstants.CENTER);
-        header.setFont(new Font("Arial", Font.BOLD, 30));
-        header.setForeground(Color.YELLOW);
+        header.setFont(new Font("Broadway", Font.BOLD, 30));
+        header.setForeground(gold);
         panel.add(header, BorderLayout.NORTH);
         
         //Area for instructions
         JTextArea instruct = new JTextArea();
-        instruct.setFont(new Font("Broadway", Font.PLAIN, 18));
-        instruct.setForeground(Color.YELLOW);
+        instruct.setFont(new Font("Ariel", Font.PLAIN, 18));
+        instruct.setForeground(gold);
         instruct.setBackground(Color.BLACK);
         instruct.setLineWrap(true);
         instruct.setWrapStyleWord(true);
@@ -78,11 +79,11 @@ public class instructionsGUI
 
         start.setFont(new Font("Arial", Font.BOLD, 18));
         start.setForeground(Color.BLACK);
-        start.setBackground(Color.YELLOW);
+        start.setBackground(gold);
         
         menu.setFont(new Font("Arial", Font.BOLD, 18));
         menu.setForeground(Color.BLACK);
-        menu.setBackground(Color.YELLOW);
+        menu.setBackground(gold);
         
         buttonPanel.add(start);
         buttonPanel.add(menu);

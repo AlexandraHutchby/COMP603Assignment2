@@ -30,6 +30,7 @@ public class menuGUI
     }
     public static void createMenuGui()
     {
+        Color gold = new Color(255, 215, 0);
         //Creating frame
         JFrame frame = new JFrame("Main Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +45,7 @@ public class menuGUI
         //Creating title
         JLabel title = new JLabel("DEAL OR NO DEAL", SwingConstants.CENTER);
         title.setFont(new Font("Broadway", Font.BOLD, 75));
-        title.setForeground(Color.YELLOW);
+        title.setForeground(gold);  //Colour for gold
         title.setBorder(new EmptyBorder(50, 0, 100, 0)); // Adds padding around the title for better centering
         panel.add(title, BorderLayout.NORTH);
         
@@ -62,21 +63,21 @@ public class menuGUI
         JButton start = new JButton("Start Game");
         start.setFont(new Font("Arial", Font.BOLD, 30));
         start.setForeground(Color.BLACK);
-        start.setBackground(Color.YELLOW);
+        start.setBackground(gold);
         startPanel.add(start, BorderLayout.CENTER);
         
         //Instruction button
         JButton instuc = new JButton("How to Play");
         instuc.setFont(new Font("Arial", Font.BOLD, 18));
         instuc.setForeground(Color.BLACK);
-        instuc.setBackground(Color.YELLOW);
+        instuc.setBackground(gold);
         buttonPanel.add(instuc, BorderLayout.WEST);  // Bottom-left corner
         
         //Leaderboard button
         JButton leaderBoard = new JButton("Leaderboard");
         leaderBoard.setFont(new Font("Arial", Font.BOLD, 18));
         leaderBoard.setForeground(Color.BLACK);
-        leaderBoard.setBackground(Color.YELLOW);
+        leaderBoard.setBackground(gold);
         buttonPanel.add(leaderBoard, BorderLayout.EAST); // Bottom-right corner
 
         panel.add(startPanel, BorderLayout.CENTER);
