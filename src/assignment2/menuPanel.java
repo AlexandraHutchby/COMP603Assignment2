@@ -4,8 +4,11 @@
  */
 package assignment2;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,33 +25,20 @@ import javax.swing.border.EmptyBorder;
  *
  * @author laina
  */
-public class menuGUI 
+public class menuPanel extends JPanel
 {
-    public static void main(String[] args) 
-    {
-      SwingUtilities.invokeLater(() -> createMenuGui());  
-    }
-    public static void createMenuGui()
-    {
-        Color gold = new Color(255, 215, 0);
-        //Creating frame
-        JFrame frame = new JFrame("Main Menu");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 500);
-        frame.setLocationRelativeTo(null);
-        
+    public menuPanel(Color gold, JPanel mainPanel, CardLayout cardLayout)
+    {        
         //Setting Background
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.BLACK);
-        panel.setLayout(new BorderLayout());
-        
+        setBackground(Color.BLACK);
+        setLayout(new BorderLayout());   
+
         //Creating title
         JLabel title = new JLabel("DEAL OR NO DEAL", SwingConstants.CENTER);
         title.setFont(new Font("Broadway", Font.BOLD, 75));
         title.setForeground(gold);  //Colour for gold
         title.setBorder(new EmptyBorder(50, 0, 100, 0)); // Adds padding around the title for better centering
-        panel.add(title, BorderLayout.NORTH);
-        
+        add(title, BorderLayout.NORTH);
         
         //Creating Buttons panels
         JPanel startPanel = new JPanel();
@@ -67,11 +57,11 @@ public class menuGUI
         startPanel.add(start, BorderLayout.CENTER);
         
         //Instruction button
-        JButton instuc = new JButton("How to Play");
-        instuc.setFont(new Font("Arial", Font.BOLD, 18));
-        instuc.setForeground(Color.BLACK);
-        instuc.setBackground(gold);
-        buttonPanel.add(instuc, BorderLayout.WEST);  // Bottom-left corner
+        JButton howTo = new JButton("How to Play");
+        howTo.setFont(new Font("Arial", Font.BOLD, 18));
+        howTo.setForeground(Color.BLACK);
+        howTo.setBackground(gold);
+        buttonPanel.add(howTo, BorderLayout.WEST);  // Bottom-left corner
         
         //Leaderboard button
         JButton leaderBoard = new JButton("Leaderboard");
@@ -80,10 +70,29 @@ public class menuGUI
         leaderBoard.setBackground(gold);
         buttonPanel.add(leaderBoard, BorderLayout.EAST); // Bottom-right corner
 
-        panel.add(startPanel, BorderLayout.CENTER);
-        panel.add(buttonPanel, BorderLayout.SOUTH); // Position buttons panel at the bottom
+        add(startPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH); // Position buttons panel at the bottom
 
-        frame.add(panel);
-        frame.setVisible(true);
+        //Action listenr for How to Play button
+        howTo.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                cardLayout.show(mainPanel, "instructionsPanel");
+                
+            }
+        });
+        
+        //Action listener for learder button
+        leaderBoard.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                cardLayout.show(mainPanel, "leaderboardPanel");
+                
+            }
+        });
     }
 }
