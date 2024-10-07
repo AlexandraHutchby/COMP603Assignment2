@@ -28,7 +28,7 @@ public class DealOrNoDealView extends JFrame{
     private void setUpCases(){
         gameScreen.setLayout(new GridLayout(5, 5));
         
-        Case c = new Case();
+        CasesModel c = new CasesModel();
         Set<Integer> caseNumbers = c.cases.keySet();
         JButton[]  caseButtons = new JButton[caseNumbers.size()];
         

@@ -38,11 +38,16 @@ public class mainTest
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         
+        GameView gp = new GameView(gold, mainPanel, cardLayout);
+        CasesModel c = new CasesModel();
+        c.createCases();
+        GameController controller = new GameController(c, gp, gold);
+        
         //Add different panels to CardLayout
-        mainPanel.add(new menuPanel(gold, mainPanel, cardLayout), "menuPanel");
-        mainPanel.add(new instructionsPanel(gold, mainPanel, cardLayout), "instructionsPanel");
-        mainPanel.add(new leaderboardPanel(gold, mainPanel, cardLayout), "leaderboardPanel");
-        mainPanel.add(new gamePanel(gold, mainPanel, cardLayout), "gamePanel");
+        mainPanel.add(new MenuView(gold, mainPanel, cardLayout), "menuPanel");
+        mainPanel.add(new InstructionsView(gold, mainPanel, cardLayout), "instructionsPanel");
+        mainPanel.add(new LeaderboardView(gold, mainPanel, cardLayout), "leaderboardPanel");
+        mainPanel.add(gp, "gamePanel");
         
         //show the frame
         frame.add(mainPanel);

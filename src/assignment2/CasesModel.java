@@ -14,7 +14,7 @@ import java.util.Set;
  * @author Alexandra and Laina
  */
 
-class Case 
+class CasesModel 
 {
     Random rand = new Random();
     //Initialising cases
@@ -91,5 +91,9 @@ class Case
     
     public double getPrice(int caseNumber){
         return cases.get(caseNumber);
+    }
+    
+    public double[] getAmounts(){
+        return price;
     }
 }

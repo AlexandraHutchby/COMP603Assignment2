@@ -25,9 +25,9 @@ import javax.swing.border.EmptyBorder;
  *
  * @author laina
  */
-public class menuPanel extends JPanel
+public class MenuView extends JPanel
 {
-    public menuPanel(Color gold, JPanel mainPanel, CardLayout cardLayout)
+    public MenuView(Color gold, JPanel mainPanel, CardLayout cardLayout)
     {        
         //Setting Background
         setBackground(Color.BLACK);

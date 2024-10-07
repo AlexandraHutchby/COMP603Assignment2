@@ -22,16 +22,34 @@ import javax.swing.SwingConstants;
  *
  * @author Alexandra
  */
-public class gamePanel extends JPanel{
-    public gamePanel(Color gold, JPanel mainPanel, CardLayout cardLayout){
+public class GameView extends JPanel{
+    private ArrayList<JButton> caseButtons;
+    private ArrayList<JButton> priceButtons;
+    CasesModel c;
+    private JLabel remainingCasesLabel;
+    private JButton restart;
+        
+    public GameView(Color gold, JPanel mainPanel, CardLayout cardLayout){
         //setting background
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         
+        caseButtons = new ArrayList<>();
+        priceButtons = new ArrayList<>();
+        
+        setupHeader(gold);
+        
+        setupCasesPanel();
+        
+        setupPricePanels(gold);
+        
+        setupBottomPanel(gold);
+    }
+    
+    private void setupHeader(Color gold){
         //header panel
-        JPanel headerPanel = new JPanel();
+        JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBackground(Color.BLACK);
-        headerPanel.setLayout(new BorderLayout());
         
         //Creating heading
         JLabel header = new JLabel("Deal or No Deal", SwingConstants.CENTER);
@@ -45,20 +63,13 @@ public class gamePanel extends JPanel{
         headerPanel.add(round, BorderLayout.SOUTH);
         
         add(headerPanel, BorderLayout.NORTH);
-        
+    }
+    
+    private void setupCasesPanel(){
         //Case Panel
-        JPanel casesPanel = new JPanel();
+        JPanel casesPanel = new JPanel(new GridLayout(7, 4, 10, 10));
         casesPanel.setBackground(Color.BLACK);
-        casesPanel.setLayout(new GridLayout(7, 4, 10, 10));
-        
-        Case c = new Case();
-        c.createCases();
-        
-        ArrayList<JButton> cases = new ArrayList<>();
-        
-        ArrayList<JButton> priceButtons = new ArrayList<>();
-        double[] amount = {0.01, 1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000};
-        
+
         for(int i = 1; i <= 26; i++){
             int index = i;
             JButton cButton = new JButton("Case "+ i);
@@ -68,45 +79,26 @@ public class gamePanel extends JPanel{
             
             cButton.setPreferredSize(new Dimension(100, 50));
             
-            cButton.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e){
-                    double price = c.getPrice(index);
-                    cButton.setText("$ " + price);
-                    
-                    boolean notfound = false;
-                    while(!notfound){
-                        for(JButton priceButton : priceButtons){
-                            if(priceButton.getText().equals("$ "+price)){
-                                priceButton.setBackground(Color.BLACK);
-                                priceButton.setForeground(Color.GRAY);
-                                notfound = true;
-                            }
-                        }
-                    }
-                }
-            });            
-            cases.add(cButton);
+            caseButtons.add(cButton);            
+            casesPanel.add(cButton);
         }
-        
-        for(JButton caseButton : cases){
-            casesPanel.add(caseButton);
-        }
-
         add(casesPanel, BorderLayout.CENTER);
-        
+    }
+    
+    private void setupPricePanels(Color gold){
+       
         //Amounts Panel left
-        JPanel amountPanelLeft = new JPanel();
+        JPanel amountPanelLeft = new JPanel(new GridLayout(13, 1, 5, 5));
         amountPanelLeft.setBackground(Color.BLACK);
-        amountPanelLeft.setLayout(new GridLayout(13, 1, 5, 5));
         
         //Amounts Panel right
-        JPanel amountPanelRight = new JPanel();
+        JPanel amountPanelRight = new JPanel(new GridLayout(13, 1, 5, 5));
         amountPanelRight.setBackground(Color.BLACK);
-        amountPanelRight.setLayout(new GridLayout(13, 1, 5, 5));
         
+        c = new CasesModel();
+        double[] amount = c.getAmounts();
        
-        for(int i = 0; i < amount.length/2; i++){
+        for(int i = 0; i < 13; i++){
             JButton price = new JButton("$ "+amount[i]);
             price.setFont(new Font("Arial", Font.PLAIN, 18));
             price.setForeground(Color.BLACK);
@@ -115,7 +107,7 @@ public class gamePanel extends JPanel{
             amountPanelLeft.add(price);
         }
         
-        for(int i = amount.length/2; i < amount.length; i++){
+        for(int i = 13; i < 26; i++){
             JButton price = new JButton("$ "+amount[i]);
             price.setFont(new Font("Arial", Font.PLAIN, 18));
             price.setForeground(Color.BLACK);
@@ -126,34 +118,45 @@ public class gamePanel extends JPanel{
         
         add(amountPanelLeft, BorderLayout.WEST);
         add(amountPanelRight, BorderLayout.EAST);
-        
+    }
+    
+    private void setupBottomPanel(Color gold){
         //Bottom panel
         JPanel bottom = new JPanel();
         bottom.setBackground(Color.BLACK);
         bottom.setLayout(new BorderLayout());
         
         //cases remaining
-        JLabel remaining = new JLabel("Cases Remaining ...", SwingConstants.CENTER);
-        remaining.setFont(new Font("Broadway", Font.BOLD, 18));
-        remaining.setForeground(Color.GRAY);
-        bottom.add(remaining, BorderLayout.CENTER);
+        remainingCasesLabel = new JLabel("Cases Remaining ...", SwingConstants.CENTER);
+        remainingCasesLabel.setFont(new Font("Broadway", Font.BOLD, 18));
+        remainingCasesLabel.setForeground(Color.GRAY);
+        bottom.add(remainingCasesLabel, BorderLayout.CENTER);
         
         //Return Button
-        JButton restart = new JButton("Main Menu");
+        restart = new JButton("Main Menu");
         restart.setFont(new Font("Arial", Font.BOLD, 18));
         restart.setForeground(Color.BLACK);
         restart.setBackground(gold);
         bottom.add(restart, BorderLayout.EAST);
         
+        
         add(bottom, BorderLayout.SOUTH);
         
-        //Action Listener for returning to menu
-        restart.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                cardLayout.show(mainPanel, "menuPanel");
-            }
-        });
+    }
+    
+    public ArrayList<JButton> getCaseButtons(){
+        return caseButtons;
+    }
+    
+    public ArrayList<JButton> getPriceButtons(){
+        return priceButtons;
+    }
+    
+    public JLabel getRemainingCasesLabel(){
+        return remainingCasesLabel;
+    }
+    
+    public JButton getRestartButton(){
+        return restart;
     }
 }
