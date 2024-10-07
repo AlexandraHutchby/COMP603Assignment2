@@ -18,11 +18,11 @@ class Case
 {
     Random rand = new Random();
     //Initialising cases
-    private int[] number = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
-    private int[] price = {1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000};
-    private int[] indexNotUsed = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24}; //Temp array to keep track of unused cases during assignment of money to cases
+    private int[] number = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
+    private double[] price = {0.01, 1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000};
+    private int[] indexNotUsed = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}; //Temp array to keep track of unused cases during assignment of money to cases
     
-    public HashMap<Integer, Integer> cases = new HashMap<>();
+    public HashMap<Integer, Double> cases = new HashMap<>();
     
     //Assigning prize money to cases
     public void createCases()
@@ -53,13 +53,13 @@ class Case
     }
     
     //Removing cases not used    
-    public HashMap<Integer, Integer> removeCase(int number)
+    public HashMap<Integer, Double> removeCase(int number)
     {
         cases.remove(number);
         return cases;
     }
     
-    public HashMap<Integer, Integer> chooseCase(Set caseNumber, Scanner scan)
+    public HashMap<Integer, Double> chooseCase(Set caseNumber, Scanner scan)
     {
         while(true)
         {
@@ -87,5 +87,9 @@ class Case
             }
         }
         
+    }
+    
+    public double getPrice(int caseNumber){
+        return cases.get(caseNumber);
     }
 }

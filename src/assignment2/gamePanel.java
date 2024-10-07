@@ -51,9 +51,16 @@ public class gamePanel extends JPanel{
         casesPanel.setBackground(Color.BLACK);
         casesPanel.setLayout(new GridLayout(7, 4, 10, 10));
         
+        Case c = new Case();
+        c.createCases();
+        
         ArrayList<JButton> cases = new ArrayList<>();
         
+        ArrayList<JButton> priceButtons = new ArrayList<>();
+        double[] amount = {0.01, 1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000};
+        
         for(int i = 1; i <= 26; i++){
+            int index = i;
             JButton cButton = new JButton("Case "+ i);
             cButton.setFont(new Font("Arial", Font.PLAIN, 18));
             cButton.setForeground(Color.BLACK);
@@ -64,7 +71,19 @@ public class gamePanel extends JPanel{
             cButton.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    cButton.setText("$..");
+                    double price = c.getPrice(index);
+                    cButton.setText("$ " + price);
+                    
+                    boolean notfound = false;
+                    while(!notfound){
+                        for(JButton priceButton : priceButtons){
+                            if(priceButton.getText().equals("$ "+price)){
+                                priceButton.setBackground(Color.BLACK);
+                                priceButton.setForeground(Color.GRAY);
+                                notfound = true;
+                            }
+                        }
+                    }
                 }
             });            
             cases.add(cButton);
@@ -78,21 +97,21 @@ public class gamePanel extends JPanel{
         
         //Amounts Panel left
         JPanel amountPanelLeft = new JPanel();
-        amountPanelLeft.setBackground(gold);
-        amountPanelLeft.setLayout(new GridLayout(13, 1, 0, 0));
+        amountPanelLeft.setBackground(Color.BLACK);
+        amountPanelLeft.setLayout(new GridLayout(13, 1, 5, 5));
         
         //Amounts Panel right
         JPanel amountPanelRight = new JPanel();
         amountPanelRight.setBackground(Color.BLACK);
-        amountPanelRight.setLayout(new GridLayout(13, 1, 0, 0));
+        amountPanelRight.setLayout(new GridLayout(13, 1, 5, 5));
         
-        double[] amount = {0.01, 1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000};
-        
+       
         for(int i = 0; i < amount.length/2; i++){
             JButton price = new JButton("$ "+amount[i]);
             price.setFont(new Font("Arial", Font.PLAIN, 18));
             price.setForeground(Color.BLACK);
             price.setBackground(gold);
+            priceButtons.add(price);
             amountPanelLeft.add(price);
         }
         
@@ -101,6 +120,7 @@ public class gamePanel extends JPanel{
             price.setFont(new Font("Arial", Font.PLAIN, 18));
             price.setForeground(Color.BLACK);
             price.setBackground(gold);
+            priceButtons.add(price);
             amountPanelRight.add(price);
         }
         
@@ -113,7 +133,7 @@ public class gamePanel extends JPanel{
         bottom.setLayout(new BorderLayout());
         
         //cases remaining
-        JLabel remaining = new JLabel("Cases Remaining ...");
+        JLabel remaining = new JLabel("Cases Remaining ...", SwingConstants.CENTER);
         remaining.setFont(new Font("Broadway", Font.BOLD, 18));
         remaining.setForeground(Color.GRAY);
         bottom.add(remaining, BorderLayout.CENTER);
