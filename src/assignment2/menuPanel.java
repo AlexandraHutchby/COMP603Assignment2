@@ -94,5 +94,12 @@ public class menuPanel extends JPanel
                 
             }
         });
+        
+        start.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                cardLayout.show(mainPanel, "gamePanel");
+            }
+        });
     }
 }

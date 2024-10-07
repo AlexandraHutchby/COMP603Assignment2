@@ -42,6 +42,7 @@ public class mainTest
         mainPanel.add(new menuPanel(gold, mainPanel, cardLayout), "menuPanel");
         mainPanel.add(new instructionsPanel(gold, mainPanel, cardLayout), "instructionsPanel");
         mainPanel.add(new leaderboardPanel(gold, mainPanel, cardLayout), "leaderboardPanel");
+        mainPanel.add(new gamePanel(gold, mainPanel, cardLayout), "gamePanel");
         
         //show the frame
         frame.add(mainPanel);
