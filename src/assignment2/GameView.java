@@ -75,7 +75,6 @@ public class GameView extends JPanel{
             cButton.setForeground(Color.BLACK);
             cButton.setBackground(Color.GRAY);
             
-            cButton.setPreferredSize(new Dimension(100, 50));
             
             caseButtons.add(cButton);            
             casesPanel.add(cButton);

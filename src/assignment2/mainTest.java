@@ -56,7 +56,7 @@ public class mainTest
         frame.setVisible(true);
         
         //Show menu panel
-        cardLayout.show(mainPanel, "bankerOfferPanel");
+        cardLayout.show(mainPanel, "menuPanel");
     }
     
     
