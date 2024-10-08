@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,8 +23,11 @@ import javax.swing.SwingConstants;
  */
 public class LeaderboardView extends JPanel
 {
+    private JPanel scoresPanel;
+    private Color gold;
     public LeaderboardView(Color gold, JPanel mainPanel, CardLayout cardLayout)
     {
+        this.gold = gold;
         //Setting background
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
@@ -54,24 +59,25 @@ public class LeaderboardView extends JPanel
  
         add(buttonPanel, BorderLayout.SOUTH);
         
-        //ActionLister for menu
-        menu.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                cardLayout.show(mainPanel, "menuPanel");
-            }
-        });   
+    }
+    
+    private void createScores(){
+        scoresPanel = new JPanel();
+        scoresPanel.setLayout(new BoxLayout(scoresPanel, BoxLayout.Y_AXIS));
+        scoresPanel.setBackground(gold);
+        add(scoresPanel, BorderLayout.CENTER);
+    }
+    
+    public void updateScores(List<String> scores){
+        scoresPanel.removeAll();
         
-        //ActionLister for start game
-        /*start.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                cardLayout.show(mainPanel, "menuPanel");
-            }
-        });*/
+        for(String score : scores){
+            JLabel scoreLabel = new JLabel(score, SwingConstants.CENTER);
+            scoreLabel.setForeground(Color.BLACK);
+            scoreLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+            scoresPanel.add(scoreLabel);
+        }
+        scoresPanel.revalidate();
+        scoresPanel.repaint();
     }
 }
