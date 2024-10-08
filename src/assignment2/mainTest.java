@@ -38,6 +38,7 @@ public class mainTest
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         
+        
         GameView gp = new GameView(gold, mainPanel, cardLayout);
         CasesModel c = new CasesModel();
         c.createCases();
@@ -48,13 +49,14 @@ public class mainTest
         mainPanel.add(new InstructionsView(gold, mainPanel, cardLayout), "instructionsPanel");
         mainPanel.add(new LeaderboardView(gold, mainPanel, cardLayout), "leaderboardPanel");
         mainPanel.add(gp, "gamePanel");
+        mainPanel.add(new BankOfferView(gold, mainPanel, cardLayout), "bankerOfferPanel");
         
         //show the frame
         frame.add(mainPanel);
         frame.setVisible(true);
         
         //Show menu panel
-        cardLayout.show(mainPanel, "menuPanel");
+        cardLayout.show(mainPanel, "bankerOfferPanel");
     }
     
     
