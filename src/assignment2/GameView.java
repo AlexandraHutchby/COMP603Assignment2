@@ -25,6 +25,7 @@ public class GameView extends JPanel{
     private ArrayList<JButton> priceButtons;
     CasesModel c;
     private JLabel remainingCasesLabel;
+    private JLabel roundLabel;
     private JButton restart;
         
     public GameView(Color gold, JPanel mainPanel, CardLayout cardLayout){
@@ -55,10 +56,10 @@ public class GameView extends JPanel{
         header.setForeground(gold);
         headerPanel.add(header, BorderLayout.NORTH);
         
-        JLabel round = new JLabel("Round 1", SwingConstants.CENTER);
-        round.setFont(new Font("Broadway", Font.BOLD, 24));
-        round.setForeground(Color.GRAY);
-        headerPanel.add(round, BorderLayout.SOUTH);
+        roundLabel = new JLabel("Round 1", SwingConstants.CENTER);
+        roundLabel.setFont(new Font("Broadway", Font.BOLD, 24));
+        roundLabel.setForeground(Color.GRAY);
+        headerPanel.add(roundLabel, BorderLayout.SOUTH);
         
         add(headerPanel, BorderLayout.NORTH);
     }
@@ -141,6 +142,18 @@ public class GameView extends JPanel{
         
     }
     
+    //Updating rounds label
+    public void updateRoundLabel(int round)
+    {
+        roundLabel.setText("Round " + round);
+    }
+    
+    //updating remaining cases label
+    public void updateRemainingCasesLabel(int remainingCases)
+    {
+        remainingCasesLabel.setText("Cases Remaining: " + remainingCases);
+    }
+    
     public ArrayList<JButton> getCaseButtons(){
         return caseButtons;
     }
@@ -155,5 +168,6 @@ public class GameView extends JPanel{
     
     public JButton getRestartButton(){
         return restart;
-    }
+    }  
+    
 }

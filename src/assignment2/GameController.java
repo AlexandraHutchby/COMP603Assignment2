@@ -18,13 +18,22 @@ import javax.swing.JButton;
 public class GameController {
     private CasesModel cases;
     private GameView view;
+    private Rounds rounds;
+    private int casesOpenedThisRound = 0;
     Color gold;
     
     public GameController(CasesModel cases, GameView view, Color gold){
         this.cases = cases;
         this.view = view;
-        setupListeners();
         this.gold = gold;
+        
+        this.rounds = new Rounds(26); //26 cases 
+        
+        // Update view with initial round and remaining cases
+        view.updateRoundLabel(rounds.getCurrentRound());
+        view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
+        
+        setupListeners();
     }
     
     private void setupListeners(){
@@ -48,6 +57,21 @@ public class GameController {
                     }
                     
                     //view.getRemainingCasesLabel().setText("Cases Remaining "+1);
+                    
+                    //Open the case in current round andupdate the cases remaing label
+                    rounds.updateRemainingCases();
+                    int remainingCases = rounds.getRemainingCasesThisRound();
+                    view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
+                    
+                    //checking if round is over and moving on to next
+                    if(remainingCases == 0)
+                    {
+                        if(rounds.nextRound())
+                        {
+                            view.updateRoundLabel(rounds.getCurrentRound());
+                            view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
+                        }
+                    }
                 }
             });
         }
@@ -68,7 +92,13 @@ public class GameController {
     }
     
     private void resetGame(){
-        view.getRemainingCasesLabel().setText("Cases Remaining ...");
+        // Reset the rounds object to start from the first round
+        this.rounds = new Rounds(26); // Reset rounds for new game
+        //casesOpenedThisRound = 0; // Reset case tracking
+
+        // Reset view labels for the new game
+        view.updateRoundLabel(rounds.getCurrentRound()); // Reset round label to the first round
+        view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound()); // Reset cases remaining label
         
         ArrayList<JButton> caseButtons = view.getCaseButtons();
         ArrayList<JButton> priceButtons = view.getPriceButtons();

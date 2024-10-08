@@ -6,30 +6,61 @@ package assignment2;
  */
 public class Rounds 
 {
-    public int[] casesToOpenPerRound(int totalCases)
+    private int currentRound;
+    private int remainingCasesThisRound;
+    private int[] casesToOpen;
+    
+    public Rounds(int totalCases) 
     {
-        int remainingCases = totalCases - 1; //Number of cases after player has chosen
-        int[] casesToOpen = {6, 5, 4, 3, 2, 1, 1, 1}; //Initial array to show how many cases are open per round
-        
-        int roundsCount= casesToOpen.length; //Number of rounds determined by the length of the casesToOpen array.
-        int[] rounds = new int[roundsCount]; //Array to store the actual number of cases to open in each round.
-        
-        
-        //Loop through each round to determine how many cases should be opened.
-        for(int i = 0; i < roundsCount; i++)
-        {
-            if(remainingCases > 1)
-            {
-                rounds[i] = casesToOpen[i];
-                remainingCases -= casesToOpen[i];
-            } else
-            {
-                rounds[i] = 0;
-            }
-        }
-        return rounds; //Returns array of cases to be opened per round
+        this.currentRound = 1; // Starting from round 1
+        this.casesToOpen = new int[] {7, 5, 4, 3, 2, 1, 1, 1}; //Initial array to show how many cases are open per round
+        this.remainingCasesThisRound  = casesToOpen[0];
     }
     
+    public int casesToOpenPerRound()
+    {
+       if(currentRound - 1 <casesToOpen.length)
+       {
+           return casesToOpen[currentRound];
+       }
+       return 0; 
+    }
+    
+    //Going to next round
+    public boolean nextRound()
+    {
+        // Check if the current round is over
+        if (remainingCasesThisRound == 0 && currentRound < casesToOpen.length) 
+        {
+            currentRound++;
+            remainingCasesThisRound = casesToOpen[currentRound - 1]; // Set remaining cases for the new round
+            return true;
+        }
+        return false;
+    }
+    
+    public void updateRemainingCases() 
+    {
+        if (remainingCasesThisRound  > 0) 
+        {
+            remainingCasesThisRound--;
+        }
+    }
+    
+    //Get methods
+    public int getCurrentRound()
+    {
+        return currentRound;
+    }
+    
+    public int getRemainingCasesThisRound()
+    {
+        return remainingCasesThisRound ;
+    }
+    public int getTotalRounds()
+    {
+        return casesToOpen.length;
+    }
 }
 
 
