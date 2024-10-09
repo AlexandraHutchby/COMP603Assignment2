@@ -39,17 +39,25 @@ public class mainTest
         mainPanel = new JPanel(cardLayout);
         
         
-        GameView gp = new GameView(gold, mainPanel, cardLayout);
+        GameView gameView = new GameView(gold, mainPanel, cardLayout);
         CasesModel c = new CasesModel();
         c.createCases();
-        GameController controller = new GameController(c, gp, gold);
+        GameController controller = new GameController(c, gameView, gold);
+        
+        LeaderboardView leaderboardView = new LeaderboardView(gold, mainPanel, cardLayout);
+        LeaderboardDatabase leaderboardDatabase = new LeaderboardDatabase();
+        LeaderboardController leaderboardController = new LeaderboardController(leaderboardDatabase, leaderboardView);
+        
+        BankOfferView bankOfferView = new BankOfferView(gold, mainPanel, cardLayout);
+        BankOfferModel bankOfferModel = new BankOfferModel();
+        BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel);
         
         //Add different panels to CardLayout
         mainPanel.add(new MenuView(gold, mainPanel, cardLayout), "menuPanel");
         mainPanel.add(new InstructionsView(gold, mainPanel, cardLayout), "instructionsPanel");
-        mainPanel.add(new LeaderboardView(gold, mainPanel, cardLayout), "leaderboardPanel");
-        mainPanel.add(gp, "gamePanel");
-        mainPanel.add(new BankOfferView(gold, mainPanel, cardLayout), "bankerOfferPanel");
+        mainPanel.add(leaderboardView, "leaderboardPanel");
+        mainPanel.add(gameView, "gamePanel");
+        mainPanel.add(bankOfferView, "bankerOfferPanel");
         
         //show the frame
         frame.add(mainPanel);

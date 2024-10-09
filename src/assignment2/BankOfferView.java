@@ -22,6 +22,8 @@ import javax.swing.SwingUtilities;
  */
 public class BankOfferView extends JPanel{
     private JLabel bankerOfferLabel;
+    private JButton deal;
+    private JButton noDeal;
     
     public BankOfferView(Color gold, JPanel mainPanel, CardLayout cardLayout){ 
         setBackground(Color.BLACK);
@@ -60,7 +62,7 @@ public class BankOfferView extends JPanel{
         dealOrNoDeal.setLayout(new GridLayout(1, 2, 10, 10));
         
         //Deal button
-        JButton deal = new JButton("Deal");
+        deal = new JButton("Deal");
         deal.setFont(new Font("Arial", Font.PLAIN, 18));
         deal.setForeground(Color.BLACK);
         deal.setBackground(Color.GREEN);
@@ -76,7 +78,7 @@ public class BankOfferView extends JPanel{
         //dealOrNoDeal.add(or, BorderLayout.CENTER);
         
         //No deal button
-        JButton noDeal = new JButton("No Deal");
+        noDeal = new JButton("No Deal");
         noDeal.setFont(new Font("Arial", Font.PLAIN, 18));
         noDeal.setForeground(Color.BLACK);
         noDeal.setBackground(Color.RED);
@@ -84,5 +86,13 @@ public class BankOfferView extends JPanel{
         dealOrNoDeal.add(noDeal);
         
         add(dealOrNoDeal, BorderLayout.SOUTH);
+    }
+    
+    public JButton getDeal(){
+        return deal;
+    }
+    
+    public JButton getNoDeal(){
+        return noDeal;
     }
 }

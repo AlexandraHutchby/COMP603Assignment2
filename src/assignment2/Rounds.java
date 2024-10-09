@@ -13,7 +13,7 @@ public class Rounds
     public Rounds(int totalCases) 
     {
         this.currentRound = 1; // Starting from round 1
-        this.casesToOpen = new int[] {7, 5, 4, 3, 2, 1, 1, 1}; //Initial array to show how many cases are open per round
+        this.casesToOpen = new int[] {6, 5, 4, 3, 2, 2, 1, 1}; //Initial array to show how many cases are open per round
         this.remainingCasesThisRound  = casesToOpen[0];
     }
     

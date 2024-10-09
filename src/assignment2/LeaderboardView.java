@@ -25,6 +25,8 @@ public class LeaderboardView extends JPanel
 {
     private JPanel scoresPanel;
     private Color gold;
+    private JButton menu;
+    private JButton start;
     public LeaderboardView(Color gold, JPanel mainPanel, CardLayout cardLayout)
     {
         this.gold = gold;
@@ -44,14 +46,14 @@ public class LeaderboardView extends JPanel
         buttonPanel.setLayout(new BorderLayout());
         
         //Start Game button
-        JButton start = new JButton("Start Game");
+        start = new JButton("Start Game");
         start.setFont(new Font("Arial", Font.BOLD, 18));
         start.setForeground(Color.BLACK);
         start.setBackground(gold);
         buttonPanel.add(start, BorderLayout.EAST);
         
         //Main Menu Button
-        JButton menu = new JButton("Main Menu");
+        menu = new JButton("Main Menu");
         menu.setFont(new Font("Arial", Font.BOLD, 18));
         menu.setForeground(Color.BLACK);
         menu.setBackground(gold);
@@ -79,5 +81,13 @@ public class LeaderboardView extends JPanel
         }
         scoresPanel.revalidate();
         scoresPanel.repaint();
+    }
+    
+    public JButton getMenu(){
+        return menu;
+    }
+    
+    public JButton getStart(){
+        return start;
     }
 }
