@@ -35,7 +35,7 @@ public class LeaderboardView extends JPanel
         setLayout(new BorderLayout());
         
         //Creating heading
-        JLabel header = new JLabel("Leaderoard", SwingConstants.CENTER);
+        JLabel header = new JLabel("Leaderboard", SwingConstants.CENTER);
         header.setFont(new Font("Broadway", Font.BOLD, 30));
         header.setForeground(gold);
         add(header, BorderLayout.NORTH);
