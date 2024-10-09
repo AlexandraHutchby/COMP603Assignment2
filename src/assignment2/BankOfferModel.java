@@ -8,16 +8,27 @@ import java.util.Scanner;
  * @author Laina and Alexandra
  */
 public class BankOfferModel 
-{
+{    
     //Calculates bank offer at the end of each round, the bank offer being half the average of remaing value in cases 
-    public int calculateOffer(Collection<Integer> remainingValues)
+    public int calculateOffer(double[] remainingValues)
     {
         int sum = 0;
-        for(int values : remainingValues)
+        int size = 0;
+        for(double values : remainingValues)
         {
             sum += values;
+            if(values != 0){
+                size++;
+            }
         }
-        int offer = (sum/remainingValues.size()) * 1/2;
+        if(sum == 0){
+            System.out.println("hi");
+            return 0;
+        }else if(size == 0){
+            System.out.println("hi2");
+            return 0;
+        }
+        int offer = (sum/size) * 1/2;
         return offer;
     }
     

@@ -95,4 +95,8 @@ public class BankOfferView extends JPanel{
     public JButton getNoDeal(){
         return noDeal;
     }
+    
+    public JLabel getOfferLabel(){
+        return bankerOfferLabel;
+    }
 }

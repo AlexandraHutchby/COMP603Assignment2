@@ -38,19 +38,21 @@ public class mainTest
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         
-        
-        GameView gameView = new GameView(gold, mainPanel, cardLayout);
         CasesModel c = new CasesModel();
         c.createCases();
-        GameController controller = new GameController(c, gameView, gold);
+        
+        BankOfferView bankOfferView = new BankOfferView(gold, mainPanel, cardLayout);
+        BankOfferModel bankOfferModel = new BankOfferModel();
+        BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c);
+        
+        GameView gameView = new GameView(gold, mainPanel, cardLayout);
+        
+        GameController controller = new GameController(c, gameView, bankOfferController, gold);
         
         LeaderboardView leaderboardView = new LeaderboardView(gold, mainPanel, cardLayout);
         LeaderboardDatabase leaderboardDatabase = new LeaderboardDatabase();
         LeaderboardController leaderboardController = new LeaderboardController(leaderboardDatabase, leaderboardView);
         
-        BankOfferView bankOfferView = new BankOfferView(gold, mainPanel, cardLayout);
-        BankOfferModel bankOfferModel = new BankOfferModel();
-        BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel);
         
         //Add different panels to CardLayout
         mainPanel.add(new MenuView(gold, mainPanel, cardLayout), "menuPanel");
@@ -58,6 +60,7 @@ public class mainTest
         mainPanel.add(leaderboardView, "leaderboardPanel");
         mainPanel.add(gameView, "gamePanel");
         mainPanel.add(bankOfferView, "bankerOfferPanel");
+        mainPanel.add(new EndView(gold, mainPanel, cardLayout), "endPanel");
         
         //show the frame
         frame.add(mainPanel);
@@ -66,7 +69,5 @@ public class mainTest
         //Show menu panel
         cardLayout.show(mainPanel, "menuPanel");
     }
-    
-    
     
 }

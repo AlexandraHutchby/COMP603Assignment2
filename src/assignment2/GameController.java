@@ -20,13 +20,17 @@ public class GameController {
     private CasesModel cases;
     private GameView view;
     private Rounds rounds;
+    private BankOfferController bankOfferController;
     private int casesOpenedThisRound = 0;
     Color gold;
+    private double[] casesOpened;
 
-    public GameController(CasesModel cases, GameView view, Color gold) {
+    public GameController(CasesModel cases, GameView view, BankOfferController bankOfferController, Color gold) {
         this.cases = cases;
         this.view = view;
         this.gold = gold;
+        this.bankOfferController = bankOfferController;
+        casesOpened = new double[26];
 
         this.rounds = new Rounds(26); //26 cases 
 
@@ -44,10 +48,11 @@ public class GameController {
         for (int i = 0; i < caseButtons.size(); i++) {
             int caseIndex = i + 1;
             JButton caseButton = caseButtons.get(i);
+            double price = cases.getPrice(caseIndex);
+            casesOpened[caseIndex-1] = price;
             caseButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    double price = cases.getPrice(caseIndex);
                     caseButton.setText("$ " + price);
                     caseButton.setBackground(Color.DARK_GRAY);
                     caseButton.setForeground(Color.WHITE);
@@ -58,16 +63,19 @@ public class GameController {
                             priceButton.setForeground(Color.GRAY);
                         }
                     }
+                    if (casesOpened[caseIndex - 1] != 0) {
+                        casesOpened[caseIndex - 1] = 0;
+                        //Open the case in current round andupdate the cases remaing label
+                        rounds.updateRemainingCases();
+                        int remainingCases = rounds.getRemainingCasesThisRound();
+                        view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
 
-                    //Open the case in current round andupdate the cases remaing label
-                    rounds.updateRemainingCases();
-                    int remainingCases = rounds.getRemainingCasesThisRound();
-                    view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
-
-                    //checking if round is over and moving on to next
-                    if (remainingCases == 0) {
-                        bankOffer();
+                        //checking if round is over and moving on to next
+                        if (remainingCases == 0) {
+                            bankOffer();
+                        }
                     }
+
                 }
             });
         }
@@ -115,6 +123,8 @@ public class GameController {
     }
 
     private void bankOffer() {
+        cases.setPricesRemaining(casesOpened);
+        bankOfferController.updateBankerOffer();
         CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
         cardLayout.show(view.getParent(), "bankerOfferPanel");
         if (rounds.nextRound()) {
