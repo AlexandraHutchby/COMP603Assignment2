@@ -93,8 +93,10 @@ public class EndView extends JPanel
         
         add(buttonPanel, BorderLayout.SOUTH);
     }
+    
+
     //TESTING MAIN DELETE 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Create the frame (window)
         JFrame frame = new JFrame("EndView Test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,5 +115,5 @@ public class EndView extends JPanel
 
         // Make the frame visible
         frame.setVisible(true);
-    }
+    }*/
 }
