@@ -38,7 +38,7 @@ public class EndView extends JPanel
         buttonPanel(gold);
     }
     
-    public void heading(Color gold)
+    private void heading(Color gold)
     {
         JLabel congrats = new JLabel("CONGRATULATIONS!", SwingConstants.CENTER);
         congrats.setFont(new Font("Broadway", Font.BOLD, 50));
@@ -62,7 +62,7 @@ public class EndView extends JPanel
         add(headingPanel, BorderLayout.NORTH);
     }
     
-    public void finalWin(Color gold)
+    private void finalWin(Color gold)
     {
         //INSERT FINAL CASE THINGS
         finalWinTotal.setText("$ ");
@@ -71,21 +71,21 @@ public class EndView extends JPanel
         add(finalWinTotal, BorderLayout.CENTER);
     }
     
-    public void buttonPanel(Color gold)
+    private void buttonPanel(Color gold)
     {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setLayout(new BorderLayout());
         
         //Play again button
-        JButton play = new JButton("Play Again");
-        play.setFont(new Font("Arial", Font.BOLD, 18));
-        play.setForeground(Color.BLACK);
-        play.setBackground(gold);
-        buttonPanel.add(play, BorderLayout.WEST);
+        playAgain = new JButton("Play Again");
+        playAgain.setFont(new Font("Arial", Font.BOLD, 18));
+        playAgain.setForeground(Color.BLACK);
+        playAgain.setBackground(gold);
+        buttonPanel.add(playAgain, BorderLayout.WEST);
         
         //Menu button
-        JButton menu = new JButton("Main Menu");
+        menu = new JButton("Main Menu");
         menu.setFont(new Font("Arial", Font.BOLD, 18));
         menu.setForeground(Color.BLACK);
         menu.setBackground(gold);
@@ -94,26 +94,15 @@ public class EndView extends JPanel
         add(buttonPanel, BorderLayout.SOUTH);
     }
     
-
-    //TESTING MAIN DELETE 
-    /*public static void main(String[] args) {
-        // Create the frame (window)
-        JFrame frame = new JFrame("EndView Test");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 500);
-
-        // Create the main panel and card layout (which you pass to EndView)
-        JPanel mainPanel = new JPanel(new CardLayout());
-        CardLayout cardLayout = (CardLayout) mainPanel.getLayout();
-
-        // Create the EndView panel with a sample gold color
-        Color gold = new Color(255, 215, 0); // Gold color
-        EndView endView = new EndView(gold, mainPanel, cardLayout);
-
-        // Add the EndView panel to the frame
-        frame.add(endView);
-
-        // Make the frame visible
-        frame.setVisible(true);
-    }*/
+    public void setWinTotal(double winning){
+        finalWinTotal.setText("$ "+winning);
+    }
+    
+    public JButton getPlayAgain(){
+        return this.playAgain;
+    }
+    
+    public JButton getMenu(){
+        return this.menu;
+    }
 }

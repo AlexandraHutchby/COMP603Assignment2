@@ -22,10 +22,8 @@ public class BankOfferModel
             }
         }
         if(sum == 0){
-            System.out.println("hi");
             return 0;
         }else if(size == 0){
-            System.out.println("hi2");
             return 0;
         }
         int offer = (sum/size) * 1/2;

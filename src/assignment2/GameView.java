@@ -25,7 +25,7 @@ public class GameView extends JPanel{
     private ArrayList<JButton> priceButtons;
     CasesModel c;
     private JLabel remainingCasesLabel;
-    private JLabel roundLabel;
+    JLabel roundLabel;
     private JButton restart;
         
     public GameView(Color gold, JPanel mainPanel, CardLayout cardLayout){
@@ -56,7 +56,7 @@ public class GameView extends JPanel{
         header.setForeground(gold);
         headerPanel.add(header, BorderLayout.NORTH);
         
-        roundLabel = new JLabel("Round 1", SwingConstants.CENTER);
+        roundLabel = new JLabel("Select your case", SwingConstants.CENTER);
         roundLabel.setFont(new Font("Broadway", Font.BOLD, 24));
         roundLabel.setForeground(Color.GRAY);
         headerPanel.add(roundLabel, BorderLayout.SOUTH);

@@ -41,13 +41,20 @@ public class mainTest
         CasesModel c = new CasesModel();
         c.createCases();
         
+        UserCaseModel userCase = new UserCaseModel();
+        
+        EndView endView = new EndView(gold, mainPanel, cardLayout);
+        EndController endController = new EndController (endView);
+        
         BankOfferView bankOfferView = new BankOfferView(gold, mainPanel, cardLayout);
         BankOfferModel bankOfferModel = new BankOfferModel();
-        BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c);
+        BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c, endView);
         
         GameView gameView = new GameView(gold, mainPanel, cardLayout);
+        FinalRoundView finalRoundView = new FinalRoundView(gold, mainPanel, cardLayout);
         
-        GameController controller = new GameController(c, gameView, bankOfferController, gold);
+        FinalRoundController finalRoundController = new FinalRoundController(finalRoundView, endView, c);
+        GameController controller = new GameController(c, gameView, bankOfferController, gold, userCase, finalRoundController);
         
         LeaderboardView leaderboardView = new LeaderboardView(gold, mainPanel, cardLayout);
         LeaderboardDatabase leaderboardDatabase = new LeaderboardDatabase();
@@ -60,7 +67,8 @@ public class mainTest
         mainPanel.add(leaderboardView, "leaderboardPanel");
         mainPanel.add(gameView, "gamePanel");
         mainPanel.add(bankOfferView, "bankerOfferPanel");
-        mainPanel.add(new EndView(gold, mainPanel, cardLayout), "endPanel");
+        mainPanel.add(endView, "endPanel");
+        mainPanel.add(finalRoundView, "finalRoundPanel");
         
         //show the frame
         frame.add(mainPanel);

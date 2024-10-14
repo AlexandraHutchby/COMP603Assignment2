@@ -24,18 +24,26 @@ public class GameController {
     private int casesOpenedThisRound = 0;
     Color gold;
     private double[] casesOpened;
+    private UserCaseModel userCase;
+    private boolean userCasePicked;
+    private int casesRemaining;
+    private FinalRoundController finalRound;
 
-    public GameController(CasesModel cases, GameView view, BankOfferController bankOfferController, Color gold) {
+    public GameController(CasesModel cases, GameView view, BankOfferController bankOfferController, Color gold, UserCaseModel userCase, FinalRoundController finalRound) {
         this.cases = cases;
         this.view = view;
         this.gold = gold;
+        this.userCase = userCase;
         this.bankOfferController = bankOfferController;
+        this.finalRound = finalRound;
         casesOpened = new double[26];
+        this.userCasePicked = false;
+        casesRemaining = 26;
 
         this.rounds = new Rounds(26); //26 cases 
 
         // Update view with initial round and remaining cases
-        view.updateRoundLabel(rounds.getCurrentRound());
+        //view.updateRoundLabel(rounds.getCurrentRound());
         view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
 
         setupListeners();
@@ -49,31 +57,46 @@ public class GameController {
             int caseIndex = i + 1;
             JButton caseButton = caseButtons.get(i);
             double price = cases.getPrice(caseIndex);
-            casesOpened[caseIndex-1] = price;
+            casesOpened[caseIndex - 1] = price;
             caseButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    caseButton.setText("$ " + price);
-                    caseButton.setBackground(Color.DARK_GRAY);
-                    caseButton.setForeground(Color.WHITE);
+                    if (userCasePicked) {
+                        if (caseIndex != userCase.getUserCaseNumber()) {
+                            caseButton.setText("$ " + price);
+                            caseButton.setBackground(Color.DARK_GRAY);
+                            caseButton.setForeground(Color.WHITE);
 
-                    for (JButton priceButton : priceButtons) {
-                        if (priceButton.getText().equals("$ " + price)) {
-                            priceButton.setBackground(Color.BLACK);
-                            priceButton.setForeground(Color.GRAY);
+                            for (JButton priceButton : priceButtons) {
+                                if (priceButton.getText().equals("$ " + price)) {
+                                    priceButton.setBackground(Color.BLACK);
+                                    priceButton.setForeground(Color.GRAY);
+                                }
+                            }
+                            if (casesOpened[caseIndex - 1] != 0) {
+                                casesOpened[caseIndex - 1] = 0;
+                                //Open the case in current round andupdate the cases remaing label
+                                rounds.updateRemainingCases();
+                                int remainingCases = rounds.getRemainingCasesThisRound();
+                                view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
+                                casesRemaining--;
+
+                                //checking if round is over and moving on to next
+                                if (remainingCases == 0) {
+                                    bankOffer();
+                                }
+                            }
+                            if (casesRemaining == 2) {
+                                goToFinalRound();
+                            }
                         }
-                    }
-                    if (casesOpened[caseIndex - 1] != 0) {
-                        casesOpened[caseIndex - 1] = 0;
-                        //Open the case in current round andupdate the cases remaing label
-                        rounds.updateRemainingCases();
-                        int remainingCases = rounds.getRemainingCasesThisRound();
+                    } else {
+                        userCase.setUserCase(cases, caseIndex);
+                        caseButton.setBackground(Color.WHITE);
+                        caseButton.setForeground(Color.BLACK);
+                        userCasePicked = true;
+                        view.updateRoundLabel(1);
                         view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
-
-                        //checking if round is over and moving on to next
-                        if (remainingCases == 0) {
-                            bankOffer();
-                        }
                     }
 
                 }
@@ -86,6 +109,21 @@ public class GameController {
                 handleRestart();
             }
         });
+    }
+
+    private void goToFinalRound() {
+        int userCaseNumber = userCase.getUserCaseNumber();
+        int remainingCase = 0;
+        for (int i = 0; i < casesOpened.length; i++) {
+            if (i != userCaseNumber) {
+                if (casesOpened[i] == 0) {
+                    remainingCase = i + 1;
+                }
+            }
+        }
+        finalRound.setCases(userCaseNumber, remainingCase);
+        CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
+        cardLayout.show(view.getParent(), "finalRoundPanel");
     }
 
     private void handleRestart() {

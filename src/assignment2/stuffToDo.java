@@ -12,20 +12,10 @@ public class stuffToDo {
 /* 
     remember to delete this at the end
     create the login in page - see if we can add a welcome back (translate from JS to J)
-    make the leaderboard work - add fake data for now
-    create the user case and move it to the bottom
+    make the leaderboard work - add fake data for now (add things that you forgot to do)
     move the case remaining to the end of the cases
-    add banker offer
-    final banker offer stuff - make it link to normal where you pick between the two cases
     create randomiser to the cases as this currently does not work
-    update how to play text file so that it fits GUI and no CUI
+    fix reset completely - currently not working as expected
+    split menu, instructions into parts
     */   
-    
-    /*
-    stuff Im going to get done tonight::
-    add the banker offer stuff over
-    attempt to connect the two together
-    create randomiser function under cases
-    update the text file
-    */
 }

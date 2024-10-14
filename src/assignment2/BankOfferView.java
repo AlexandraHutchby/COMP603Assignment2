@@ -69,14 +69,6 @@ public class BankOfferView extends JPanel{
         deal.setPreferredSize(new Dimension(100, 50));
         dealOrNoDeal.add(deal);
         
-        
-        //or label
-        JLabel or = new JLabel("or");
-        or.setFont(new Font("Arial", Font.PLAIN, 18));
-        or.setForeground(Color.WHITE);
-        or.setBackground(Color.BLACK);
-        //dealOrNoDeal.add(or, BorderLayout.CENTER);
-        
         //No deal button
         noDeal = new JButton("No Deal");
         noDeal.setFont(new Font("Arial", Font.PLAIN, 18));

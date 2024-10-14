@@ -12,54 +12,45 @@ import java.awt.event.ActionListener;
  *
  * @author Alexandra
  */
-public class BankOfferController {
-    private BankOfferView view;
-    private BankOfferModel model;
-    private double[] remainingValues;
-    private int offer;
+public class FinalRoundController {
+    private FinalRoundView view;
     private EndView endView;
-    
-    public BankOfferController(BankOfferView view, BankOfferModel model, CasesModel c, EndView endView){
+    private int userCase;
+    private int remainingCase;
+    private CasesModel casesModel;
+    public FinalRoundController(FinalRoundView view, EndView endView, CasesModel casesModel){
         this.view = view;
-        this.model = model;
-        this.remainingValues = c.getRemaining();
         this.endView = endView;
-        
+        this.casesModel = casesModel;
         setupListeners();
-        
-        setupOffer();
     }
     
-    //update so that view goes to the end page
+    public void setCases(int userCase, int remainingCase){
+        this.userCase = userCase;
+        this.remainingCase = remainingCase;
+        view.getCase1().setText("Case " + userCase);
+        view.getCase2().setText("Case " + remainingCase);
+    }
+    
     private void setupListeners(){
-        view.getDeal().addActionListener(new ActionListener(){
+        view.getCase1().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                endView.setWinTotal(offer);
+                endView.setWinTotal(casesModel.getPrice(userCase));
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                 cardLayout.show(view.getParent(), "endPanel");
             }
         });
         
-        view.getNoDeal().addActionListener(new ActionListener(){
+        view.getCase2().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-               
+                endView.setWinTotal(casesModel.getPrice(remainingCase));
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
-                cardLayout.show(view.getParent(), "gamePanel");
+                cardLayout.show(view.getParent(), "endPanel");
             }
         });
     }
     
-    public void updateBankerOffer(){
-        setupOffer();
-    }
-    
-    private void setupOffer(){
-        offer = model.calculateOffer(remainingValues);
-        view.getOfferLabel().setText("$ "+offer);
-    }
-    
     
 }
-
