@@ -27,79 +27,80 @@ import javax.swing.border.EmptyBorder;
  */
 public class MenuView extends JPanel
 {
+    private JButton start;
+    private JButton howTo;
+    private JButton leaderBoard;
     public MenuView(Color gold, JPanel mainPanel, CardLayout cardLayout)
     {        
         //Setting Background
         setBackground(Color.BLACK);
-        setLayout(new BorderLayout());   
-
+        setLayout(new BorderLayout());          
+        
+        createHeader(gold);
+        createStartPanel(gold);
+        createButtons(gold);
+    }
+    
+    private void createHeader(Color gold){
         //Creating title
         JLabel title = new JLabel("DEAL OR NO DEAL", SwingConstants.CENTER);
         title.setFont(new Font("Broadway", Font.BOLD, 75));
         title.setForeground(gold);  //Colour for gold
         title.setBorder(new EmptyBorder(50, 0, 100, 0)); // Adds padding around the title for better centering
         add(title, BorderLayout.NORTH);
-        
-        //Creating Buttons panels
+    }
+    
+    private void createStartPanel(Color gold){
         JPanel startPanel = new JPanel();
         startPanel.setBackground(Color.BLACK);
         startPanel.setBorder(new EmptyBorder(50, 0, 0, 0)); // Add padding to push the button lower
         
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.BLACK);
-        buttonPanel.setLayout(new BorderLayout());
-        
         //Start Button
-        JButton start = new JButton("Start Game");
+        start = new JButton("Start Game");
         start.setFont(new Font("Arial", Font.BOLD, 30));
         start.setForeground(Color.BLACK);
         start.setBackground(gold);
         startPanel.add(start, BorderLayout.CENTER);
         
+        add(startPanel, BorderLayout.CENTER);
+    }
+    
+    private void createButtons(Color gold){
+        //Creating Buttons panels
+        
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.BLACK);
+        buttonPanel.setLayout(new BorderLayout());
+        
+       
+        
         //Instruction button
-        JButton howTo = new JButton("How to Play");
+        howTo = new JButton("How to Play");
         howTo.setFont(new Font("Arial", Font.BOLD, 18));
         howTo.setForeground(Color.BLACK);
         howTo.setBackground(gold);
         buttonPanel.add(howTo, BorderLayout.WEST);  // Bottom-left corner
         
         //Leaderboard button
-        JButton leaderBoard = new JButton("Leaderboard");
+        leaderBoard = new JButton("Leaderboard");
         leaderBoard.setFont(new Font("Arial", Font.BOLD, 18));
         leaderBoard.setForeground(Color.BLACK);
         leaderBoard.setBackground(gold);
         buttonPanel.add(leaderBoard, BorderLayout.EAST); // Bottom-right corner
 
-        add(startPanel, BorderLayout.CENTER);
+        
         add(buttonPanel, BorderLayout.SOUTH); // Position buttons panel at the bottom
-
-        //Action listenr for How to Play button
-        howTo.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                cardLayout.show(mainPanel, "instructionsPanel");
-                
-            }
-        });
-        
-        //Action listener for learder button
-        leaderBoard.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                cardLayout.show(mainPanel, "leaderboardPanel");
-                
-            }
-        });
-        
-        start.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                cardLayout.show(mainPanel, "gamePanel");
-            }
-        });
+    }
+    
+    public JButton getHowTo(){
+        return this.howTo;
+    }
+    
+    public JButton getLeaderBoard(){
+        return this.leaderBoard;
+    }
+    
+    public JButton getStart(){
+        return this.start;
     }
 }

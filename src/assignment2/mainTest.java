@@ -60,10 +60,15 @@ public class mainTest
         LeaderboardDatabase leaderboardDatabase = new LeaderboardDatabase();
         LeaderboardController leaderboardController = new LeaderboardController(leaderboardDatabase, leaderboardView);
         
+        MenuView menuView = new MenuView(gold, mainPanel, cardLayout);
+        MenuController menuController = new MenuController(menuView);
+        
+        InstructionsView instructionsView = new InstructionsView(gold, mainPanel, cardLayout);
+        InstructionsController instructionsController = new InstructionsController(instructionsView);
         
         //Add different panels to CardLayout
-        mainPanel.add(new MenuView(gold, mainPanel, cardLayout), "menuPanel");
-        mainPanel.add(new InstructionsView(gold, mainPanel, cardLayout), "instructionsPanel");
+        mainPanel.add(menuView, "menuPanel");
+        mainPanel.add(instructionsView, "instructionsPanel");
         mainPanel.add(leaderboardView, "leaderboardPanel");
         mainPanel.add(gameView, "gamePanel");
         mainPanel.add(bankOfferView, "bankerOfferPanel");

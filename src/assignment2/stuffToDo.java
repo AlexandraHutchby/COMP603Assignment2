@@ -16,6 +16,5 @@ public class stuffToDo {
     move the case remaining to the end of the cases
     create randomiser to the cases as this currently does not work
     fix reset completely - currently not working as expected
-    split menu, instructions into parts
     */   
 }

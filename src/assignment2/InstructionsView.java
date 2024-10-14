@@ -28,18 +28,29 @@ import javax.swing.SwingUtilities;
  */
 public class InstructionsView extends JPanel
 {
+    private JButton menu;
+    private JButton start;
     public InstructionsView(Color gold, JPanel mainPanel, CardLayout cardLayout)
     {
         //Setting background
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         
+        createHeading(gold);
+        addInstructions(gold);
+        createButtons(gold);     
+
+    }
+    
+    private void createHeading(Color gold){
         //Creating heading
         JLabel header = new JLabel("How to play:", SwingConstants.CENTER);
         header.setFont(new Font("Broadway", Font.BOLD, 30));
         header.setForeground(gold);
         add(header, BorderLayout.NORTH);
-        
+    }
+    
+    private void addInstructions(Color gold){
         //Area for instructions
         JTextArea howTo = new JTextArea();
         howTo.setFont(new Font("Ariel", Font.PLAIN, 18));
@@ -53,47 +64,31 @@ public class InstructionsView extends JPanel
         String instructions = loadInstructionsFromFile("./resources/Instructions.txt");
         howTo.setText(instructions);
         add(howTo, BorderLayout.CENTER);
-        
+    }
+    
+    private void createButtons(Color gold){
         //Buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setLayout(new BorderLayout());
         
         //Start Game button
-        JButton start = new JButton("Start Game");
+        start = new JButton("Start Game");
         start.setFont(new Font("Arial", Font.BOLD, 18));
         start.setForeground(Color.BLACK);
         start.setBackground(gold);
         buttonPanel.add(start, BorderLayout.EAST);
         
         //Main Menu Button
-        JButton menu = new JButton("Main Menu");
+        menu = new JButton("Main Menu");
         menu.setFont(new Font("Arial", Font.BOLD, 18));
         menu.setForeground(Color.BLACK);
         menu.setBackground(gold);
         buttonPanel.add(menu, BorderLayout.WEST);
  
         add(buttonPanel, BorderLayout.SOUTH);
-
-        //ActionLister for menu button
-        menu.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                cardLayout.show(mainPanel, "menuPanel");
-            }
-        }); 
-        //ActionLister for start game
-        /*start.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                cardLayout.show(mainPanel, "menuPanel");
-            }
-        });*/ 
     }
+    
     private static String loadInstructionsFromFile(String filePath) 
     {
         StringBuilder instructions = new StringBuilder();
@@ -107,5 +102,13 @@ public class InstructionsView extends JPanel
             instructions.append("Error loading instructions."); // Show error message if file cannot be read
         }
         return instructions.toString();
+    }
+    
+    public JButton getMenu(){
+        return this.menu;
+    }
+    
+    public JButton getStart(){
+        return this.start;
     }
 }
