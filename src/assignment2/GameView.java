@@ -27,12 +27,28 @@ public class GameView extends JPanel{
     private JLabel remainingCasesLabel;
     JLabel roundLabel;
     private JButton restart;
+    private Color gold;
         
     public GameView(Color gold, JPanel mainPanel, CardLayout cardLayout){
+        this.gold = gold;
+
         //setting background
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         
+        caseButtons = new ArrayList<>();
+        priceButtons = new ArrayList<>();
+        
+        setupHeader(gold);
+        
+        setupCasesPanel();
+        
+        setupPricePanels(gold);
+        
+        setupBottomPanel(gold);
+    }
+    
+    public void resetGameView(){
         caseButtons = new ArrayList<>();
         priceButtons = new ArrayList<>();
         

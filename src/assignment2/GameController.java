@@ -85,10 +85,11 @@ public class GameController {
                                 if (remainingCases == 0) {
                                     bankOffer();
                                 }
+                                if (casesRemaining == 2) {
+                                    goToFinalRound();
+                                }
                             }
-                            if (casesRemaining == 2) {
-                                goToFinalRound();
-                            }
+
                         }
                     } else {
                         userCase.setUserCase(cases, caseIndex);
@@ -157,7 +158,12 @@ public class GameController {
             prices.setBackground(gold);
             prices.setForeground(Color.BLACK);
         }
-
+        cases.resetCases();
+        view.resetGameView();
+        userCasePicked = false;
+        
+        casesOpened = new double[26];
+        casesRemaining = 26;
     }
 
     private void bankOffer() {
