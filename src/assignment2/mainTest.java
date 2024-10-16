@@ -38,6 +38,10 @@ public class mainTest
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         
+        //Creating loginView
+        
+        
+        
         CasesModel c = new CasesModel();
         c.createCases();
         
