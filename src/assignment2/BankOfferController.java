@@ -18,12 +18,15 @@ public class BankOfferController {
     private double[] remainingValues;
     private int offer;
     private EndView endView;
+    private LeaderboardDatabase leaderboardDatabase;
     
-    public BankOfferController(BankOfferView view, BankOfferModel model, CasesModel c, EndView endView){
+    public BankOfferController(BankOfferView view, BankOfferModel model, CasesModel c, EndView endView, LeaderboardDatabase leaderboardDatabase)
+    {
         this.view = view;
         this.model = model;
         this.remainingValues = c.getRemaining();
         this.endView = endView;
+        this.leaderboardDatabase = leaderboardDatabase;
         
         setupListeners();
         
@@ -36,6 +39,7 @@ public class BankOfferController {
             @Override
             public void actionPerformed(ActionEvent e){
                 endView.setWinTotal(offer);
+                leaderboardDatabase.updateScore(offer);
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                 cardLayout.show(view.getParent(), "endPanel");
             }

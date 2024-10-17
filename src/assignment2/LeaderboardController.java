@@ -22,6 +22,8 @@ public class LeaderboardController {
         this.database = database;
         this.view = view;
         setupListeners();
+        updateLeaderboard();
+        
     }
     
     public void updateLeaderboard(){

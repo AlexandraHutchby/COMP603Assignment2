@@ -11,10 +11,10 @@ package assignment2;
 public class stuffToDo {
 /* 
     remember to delete this at the end
-    create the login in page - see if we can add a welcome back (translate from JS to J)
-    make the leaderboard work - add fake data for now (add things that you forgot to do)
-    move the case remaining to the end of the cases
-    create randomiser to the cases as this currently does not work
-    fix reset completely - currently not working as expected
+    Alexandra:
+    
+    Laina:
+    Fix reset
+    Fix Game Controller so that Deal or No Deal Round 8 shows
     */   
 }

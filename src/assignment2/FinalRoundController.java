@@ -18,10 +18,13 @@ public class FinalRoundController {
     private int userCase;
     private int remainingCase;
     private CasesModel casesModel;
-    public FinalRoundController(FinalRoundView view, EndView endView, CasesModel casesModel){
+    private LeaderboardDatabase leaderboardDatabase;
+    
+    public FinalRoundController(FinalRoundView view, EndView endView, CasesModel casesModel, LeaderboardDatabase leaderboardDatabase){
         this.view = view;
         this.endView = endView;
         this.casesModel = casesModel;
+        this.leaderboardDatabase = leaderboardDatabase;
         setupListeners();
     }
     
@@ -37,6 +40,7 @@ public class FinalRoundController {
             @Override
             public void actionPerformed(ActionEvent e){
                 endView.setWinTotal(casesModel.getPrice(userCase));
+                leaderboardDatabase.updateScore(casesModel.getPrice(userCase));
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                 cardLayout.show(view.getParent(), "endPanel");
             }
@@ -46,6 +50,7 @@ public class FinalRoundController {
             @Override
             public void actionPerformed(ActionEvent e){
                 endView.setWinTotal(casesModel.getPrice(remainingCase));
+                leaderboardDatabase.updateScore(casesModel.getPrice(userCase));
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                 cardLayout.show(view.getParent(), "endPanel");
             }

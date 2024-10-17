@@ -28,7 +28,6 @@ public class LoginDatabase {
     public LoginDatabase() {
         connectToDatabase();
         createLoginTable();
-        insertUsername();
     }
 
     private void connectToDatabase() {
@@ -70,26 +69,26 @@ public class LoginDatabase {
         }
     }
 
-    public void insertUsername() {
+    public void insertUsername(String username, String password) {
         try {
             if (conn == null) {
                 connectToDatabase();
             }
+            if (!checkUsernameAndPassword(username, password) && !checkUsername(username)) {
+                String insertSQL = "INSERT INTO login (username, password) VALUES (?, ?)";
+                this.preparedStatement = conn.prepareStatement(insertSQL);
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
 
-            String insertSQL = "INSERT INTO login (username, password) VALUES (?, ?)";
-            this.preparedStatement = conn.prepareStatement(insertSQL);
-            preparedStatement.setString(1, "laina");
-            preparedStatement.setString(2, "laina01");
-
-            preparedStatement.executeUpdate();
-            System.out.println("A new user has been added");
-
+                preparedStatement.executeUpdate();
+                System.out.println("A new user has been added");
+            }
         } catch (SQLException e) {
             System.out.println("SQLException in insert username");
         }
     }
 
-    public boolean checkUsername() {
+    public boolean checkUsernameAndPassword(String username, String password) {
         try {
             if (conn == null) {
                 connectToDatabase();
@@ -97,9 +96,27 @@ public class LoginDatabase {
 
             String selectSQL = "SELECT * FROM login WHERE username = ? AND password = ?";
             this.preparedStatement = conn.prepareStatement(selectSQL);
-            preparedStatement.setString(1, "laina");
-            preparedStatement.setString(2, "laina01");
-            
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.out.println("SQLException in check username in leaderboard");
+            return false;
+        }
+    }
+    
+    public boolean checkUsername(String username){
+                try {
+            if (conn == null) {
+                connectToDatabase();
+            }
+
+            String selectSQL = "SELECT * FROM login WHERE username = ?";
+            this.preparedStatement = conn.prepareStatement(selectSQL);
+            preparedStatement.setString(1, username);
+
             resultSet = preparedStatement.executeQuery();
             return resultSet.next();
         } catch (SQLException e) {

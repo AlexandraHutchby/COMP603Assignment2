@@ -47,22 +47,28 @@ public class mainTest
         
         UserCaseModel userCase = new UserCaseModel();
         
+        LeaderboardView leaderboardView = new LeaderboardView(gold, mainPanel, cardLayout);
+        LeaderboardDatabase leaderboardDatabase = new LeaderboardDatabase();
+        LeaderboardController leaderboardController = new LeaderboardController(leaderboardDatabase, leaderboardView);
+        
+        LoginView loginView = new LoginView(gold, mainPanel, cardLayout);
+        LoginDatabase loginDatabase = new LoginDatabase();
+        LoginController loginController = new LoginController(loginDatabase, loginView, leaderboardDatabase);
+        
         EndView endView = new EndView(gold, mainPanel, cardLayout);
         EndController endController = new EndController (endView);
         
         BankOfferView bankOfferView = new BankOfferView(gold, mainPanel, cardLayout);
         BankOfferModel bankOfferModel = new BankOfferModel();
-        BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c, endView);
+        BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c, endView, leaderboardDatabase);
         
         GameView gameView = new GameView(gold, mainPanel, cardLayout);
         FinalRoundView finalRoundView = new FinalRoundView(gold, mainPanel, cardLayout);
         
-        FinalRoundController finalRoundController = new FinalRoundController(finalRoundView, endView, c);
+        FinalRoundController finalRoundController = new FinalRoundController(finalRoundView, endView, c, leaderboardDatabase);
         GameController controller = new GameController(c, gameView, bankOfferController, gold, userCase, finalRoundController);
         
-        LeaderboardView leaderboardView = new LeaderboardView(gold, mainPanel, cardLayout);
-        LeaderboardDatabase leaderboardDatabase = new LeaderboardDatabase();
-        LeaderboardController leaderboardController = new LeaderboardController(leaderboardDatabase, leaderboardView);
+        
         
         MenuView menuView = new MenuView(gold, mainPanel, cardLayout);
         MenuController menuController = new MenuController(menuView);
@@ -70,7 +76,9 @@ public class mainTest
         InstructionsView instructionsView = new InstructionsView(gold, mainPanel, cardLayout);
         InstructionsController instructionsController = new InstructionsController(instructionsView);
         
+        
         //Add different panels to CardLayout
+        mainPanel.add(loginView, "loginPanel");
         mainPanel.add(menuView, "menuPanel");
         mainPanel.add(instructionsView, "instructionsPanel");
         mainPanel.add(leaderboardView, "leaderboardPanel");
@@ -84,7 +92,7 @@ public class mainTest
         frame.setVisible(true);
         
         //Show menu panel
-        cardLayout.show(mainPanel, "menuPanel");
+        cardLayout.show(mainPanel, "loginPanel");
     }
     
 }
