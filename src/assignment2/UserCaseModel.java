@@ -20,6 +20,12 @@ public class UserCaseModel extends CasesModel {
     public UserCaseModel() {
 
     }
+    
+    public void reset()
+    {
+        userCaseNumber = 0;
+        userCasePrice = 0.0;
+    }
 
     public void setUserCase(CasesModel c, int userCaseNumber) {
         this.c = c;

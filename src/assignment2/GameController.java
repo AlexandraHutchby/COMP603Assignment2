@@ -43,9 +43,9 @@ public class GameController {
         this.rounds = new Rounds(26); //26 cases 
 
         // Update view with initial round and remaining cases
-        //view.updateRoundLabel(rounds.getCurrentRound());
         view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound());
 
+        //view.getBackToMainMenuButton().addActionListener(e -> resetGame());
         setupListeners();
     }
 
@@ -104,12 +104,21 @@ public class GameController {
             });
         }
 
-        view.getRestartButton().addActionListener(new ActionListener() {
+        /*view.getPlayAgainButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleRestart();
+                handleRestartPlayAgain();
             }
         });
+        
+        view.getBackToMainMenuButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleRestartMainMenu();
+            }
+        });*/
+        view.getPlayAgainButton().addActionListener(e -> handleRestartPlayAgain());
+        view.getBackToMainMenuButton().addActionListener(e -> handleRestartMainMenu());
     }
 
     private void goToFinalRound() {
@@ -127,43 +136,45 @@ public class GameController {
         cardLayout.show(view.getParent(), "finalRoundPanel");
     }
 
-    private void handleRestart() {
+    void handleRestartPlayAgain() {
+        resetGame();
+
+        CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
+        cardLayout.show(view.getParent(), "gamePanel");
+    }
+    
+    void handleRestartMainMenu() {
         resetGame();
 
         CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
         cardLayout.show(view.getParent(), "menuPanel");
     }
 
-    private void resetGame() {
-        // Reset the rounds object to start from the first round
-        this.rounds = new Rounds(26); // Reset rounds for new game
-        //casesOpenedThisRound = 0; // Reset case tracking
-
-        // Reset view labels for the new game
-        view.updateRoundLabel(rounds.getCurrentRound()); // Reset round label to the first round
-        view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound()); // Reset cases remaining label
-
-        ArrayList<JButton> caseButtons = view.getCaseButtons();
-        ArrayList<JButton> priceButtons = view.getPriceButtons();
-
-        int index = 1;
-        for (JButton cases : caseButtons) {
-            cases.setBackground(Color.GRAY);
-            cases.setForeground(Color.BLACK);
-            cases.setText("Case " + index);
-            index++;
+    private void resetGame() 
+    {
+        rounds.reset();         //reseting rounds
+        cases.resetCases();     //reseting cases
+        //reset any opened cases array
+        for(int i = 0; i < casesOpened.length; i++)
+        {
+            casesOpened[i] = cases.getPrice(i + 1);
         }
-
-        for (JButton prices : priceButtons) {
-            prices.setBackground(gold);
-            prices.setForeground(Color.BLACK);
-        }
-        cases.resetCases();
-        view.resetGameView();
-        userCasePicked = false;
         
-        casesOpened = new double[26];
+        view.resetGameView();   //reseting game view
+        userCase.reset();       //reset usercase
+        userCasePicked = false; //usercase not selected
         casesRemaining = 26;
+        
+        //reseting banker offer contoller
+        bankOfferController.reset();
+        bankOfferController.updateBankerOffer();
+        
+        casesOpenedThisRound  = 0;
+        
+        //updating view
+        view.updateRoundLabel(1);
+        view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound()); 
+        
     }
 
     private void bankOffer() {

@@ -38,10 +38,6 @@ public class mainTest
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         
-        //Creating loginView
-        
-        
-        
         CasesModel c = new CasesModel();
         c.createCases();
         
@@ -56,8 +52,7 @@ public class mainTest
         LoginController loginController = new LoginController(loginDatabase, loginView, leaderboardDatabase);
         
         EndView endView = new EndView(gold, mainPanel, cardLayout);
-        EndController endController = new EndController (endView);
-        
+
         BankOfferView bankOfferView = new BankOfferView(gold, mainPanel, cardLayout);
         BankOfferModel bankOfferModel = new BankOfferModel();
         BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c, endView, leaderboardDatabase);
@@ -68,7 +63,7 @@ public class mainTest
         FinalRoundController finalRoundController = new FinalRoundController(finalRoundView, endView, c, leaderboardDatabase);
         GameController controller = new GameController(c, gameView, bankOfferController, gold, userCase, finalRoundController);
         
-        
+        EndController endController = new EndController (endView, controller);
         
         MenuView menuView = new MenuView(gold, mainPanel, cardLayout);
         MenuController menuController = new MenuController(menuView);

@@ -31,7 +31,7 @@ public class LeaderboardDatabase {
     public LeaderboardDatabase() {
         connectToDatabase();
         createLeaderboardTable();
-        //insertScoresInLeaderboard();
+        insertScoresInLeaderboard(currentUsername);
         retrieveLeaderboard();
     }
 

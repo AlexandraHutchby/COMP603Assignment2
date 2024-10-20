@@ -56,6 +56,24 @@ public class FinalRoundController {
             }
         });
     }
+
+    void reset() 
+    {
+        //reset cases to default state
+        userCase = -1;
+        remainingCase = -1;
+        
+        //reset view lables for final cases
+        view.getCase1().setText("Case " + userCase);
+        view.getCase2().setText("Case " + remainingCase);
+        
+        //Reset winning total to zero
+        endView.setWinTotal(0);
+        
+        //Resetting buttons for final round
+        view.getCase1().setEnabled(true);
+        view.getCase2().setEnabled(true);
+    }
     
     
 }

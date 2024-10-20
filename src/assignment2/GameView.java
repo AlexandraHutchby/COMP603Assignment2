@@ -26,7 +26,8 @@ public class GameView extends JPanel{
     CasesModel c;
     private JLabel remainingCasesLabel;
     JLabel roundLabel;
-    private JButton restart;
+    private JButton playAgainButton; 
+    private JButton backToMainMenuButton; 
     private Color gold;
         
     public GameView(Color gold, JPanel mainPanel, CardLayout cardLayout){
@@ -48,17 +49,32 @@ public class GameView extends JPanel{
         setupBottomPanel(gold);
     }
     
-    public void resetGameView(){
-        caseButtons = new ArrayList<>();
-        priceButtons = new ArrayList<>();
-        
-        setupHeader(gold);
-        
-        setupCasesPanel();
-        
-        setupPricePanels(gold);
-        
-        setupBottomPanel(gold);
+    public void resetGameView()
+    {
+        //reseting case buttons to default
+        int index = 1;
+        for (JButton cButton : caseButtons) 
+        {
+            cButton.setText("Case " + index);
+            cButton.setBackground(Color.GRAY);
+            cButton.setForeground(Color.BLACK);
+            cButton.setEnabled(true);
+            index++;
+        }
+
+        // Reset price buttons to default state
+        for (JButton pButton : priceButtons) 
+        {
+            pButton.setBackground(gold);
+            pButton.setForeground(Color.BLACK);
+            pButton.setEnabled(true);
+        }
+
+        // Reset round and remaining cases labels
+        updateRoundLabel(1);
+        updateRemainingCasesLabel(6); // First round opens 6 cases
+        revalidate();
+        repaint();
     }
     
     private void setupHeader(Color gold){
@@ -146,16 +162,29 @@ public class GameView extends JPanel{
         remainingCasesLabel.setForeground(Color.GRAY);
         bottom.add(remainingCasesLabel, BorderLayout.CENTER);
         
-        //Return Button
-        restart = new JButton("Main Menu");
-        restart.setFont(new Font("Arial", Font.BOLD, 18));
-        restart.setForeground(Color.BLACK);
-        restart.setBackground(gold);
-        bottom.add(restart, BorderLayout.EAST);
+        //Back to main menu Button
+        backToMainMenuButton  = new JButton("Main Menu");
+        backToMainMenuButton .setFont(new Font("Arial", Font.BOLD, 18));
+        backToMainMenuButton .setForeground(Color.BLACK);
+        backToMainMenuButton .setBackground(gold);
+        bottom.add(backToMainMenuButton , BorderLayout.EAST);
+        
+        // restart Button
+        playAgainButton = new JButton("Restart");
+        playAgainButton.setFont(new Font("Arial", Font.BOLD, 18));
+        playAgainButton.setForeground(Color.BLACK);
+        playAgainButton.setBackground(gold);
+        bottom.add(playAgainButton, BorderLayout.WEST);
+        
         
         
         add(bottom, BorderLayout.SOUTH);
         
+    }
+    
+    public void updateRoundLabel(String roundText)
+    {
+        roundLabel.setText(roundText);
     }
     
     //Updating rounds label
@@ -182,8 +211,14 @@ public class GameView extends JPanel{
         return remainingCasesLabel;
     }
     
-    public JButton getRestartButton(){
-        return restart;
-    }  
+    public JButton getPlayAgainButton() 
+    {
+        return playAgainButton;
+    }
+
+    public JButton getBackToMainMenuButton() 
+    {
+        return backToMainMenuButton; 
+    } 
     
 }

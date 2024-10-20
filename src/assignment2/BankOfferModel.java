@@ -26,7 +26,7 @@ public class BankOfferModel
         }else if(size == 0){
             return 0;
         }
-        int offer = (sum/size) * 1/2;
+        int offer = (sum/size) / 2;
         return offer;
     }
     

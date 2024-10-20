@@ -47,6 +47,15 @@ public class Rounds
         }
     }
     
+    //rounds reset method for a new game
+    public void reset()
+    {
+        currentRound = 1;
+        casesToOpen = new int[]{6, 5, 4, 3, 2, 2, 1, 1};
+        remainingCasesThisRound = casesToOpen[0];
+    }
+    
+    
     //Get methods
     public int getCurrentRound()
     {

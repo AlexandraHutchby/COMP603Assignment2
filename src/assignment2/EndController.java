@@ -13,27 +13,31 @@ import java.awt.event.ActionListener;
  * @author Alexandra
  */
 public class EndController {
-    private EndView view;
-    public EndController(EndView view){
-        this.view = view;
-        
+    private EndView viewGame;
+    private GameController gameController;
+    
+    public EndController(EndView viewGame, GameController gameController){
+        this.viewGame = viewGame;
+        this.gameController = gameController;
         setupListeners();
     }
     
     private void setupListeners(){
-        view.getMenu().addActionListener(new ActionListener(){
+        viewGame.getMenu().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
-                cardLayout.show(view.getParent(), "menuPanel");
+                gameController.handleRestartMainMenu();
+                CardLayout cardLayout = (CardLayout) viewGame.getParent().getLayout();
+                cardLayout.show(viewGame.getParent(), "menuPanel");
             }
         });
         
-        view.getPlayAgain().addActionListener(new ActionListener(){
+        viewGame.getPlayAgain().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
-                cardLayout.show(view.getParent(), "gamePanel");
+                gameController.handleRestartPlayAgain();
+                CardLayout cardLayout = (CardLayout) viewGame.getParent().getLayout();
+                cardLayout.show(viewGame.getParent(), "gamePanel");
             }
         });
     }

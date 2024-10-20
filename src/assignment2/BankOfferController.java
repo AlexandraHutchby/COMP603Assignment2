@@ -15,21 +15,22 @@ import java.awt.event.ActionListener;
 public class BankOfferController {
     private BankOfferView view;
     private BankOfferModel model;
+    private CasesModel casesModel;
     private double[] remainingValues;
     private int offer;
     private EndView endView;
     private LeaderboardDatabase leaderboardDatabase;
     
-    public BankOfferController(BankOfferView view, BankOfferModel model, CasesModel c, EndView endView, LeaderboardDatabase leaderboardDatabase)
+    public BankOfferController(BankOfferView view, BankOfferModel model, CasesModel casesModel, EndView endView, LeaderboardDatabase leaderboardDatabase)
     {
         this.view = view;
         this.model = model;
-        this.remainingValues = c.getRemaining();
+        this.casesModel = casesModel;
+        this.remainingValues = casesModel.getRemaining();
         this.endView = endView;
         this.leaderboardDatabase = leaderboardDatabase;
         
         setupListeners();
-        
         setupOffer();
     }
     
@@ -62,6 +63,16 @@ public class BankOfferController {
     private void setupOffer(){
         offer = model.calculateOffer(remainingValues);
         view.getOfferLabel().setText("$ "+offer);
+    }
+
+    public void reset() 
+    {
+        remainingValues = casesModel.getRemaining(); // Fetch the latest remaining values after reset
+        setupOffer();
+        //reset label and buttons
+        view.getOfferLabel().setText("$ " + offer);
+        view.getDeal().setEnabled(true); 
+        view.getNoDeal().setEnabled(true);
     }
     
     

@@ -62,10 +62,10 @@ class CasesModel
         indexNotUsed = temp;
     }
     
+    
+    
     public void resetCases(){
-        for(Double item : cases.values()){
-            cases.remove(item);
-        }
+        cases.clear();
         createCases();
     }
     
