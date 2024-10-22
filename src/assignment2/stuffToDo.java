@@ -10,9 +10,7 @@ package assignment2;
  */
 public class stuffToDo {
 /* 
-    remember to delete this at the end
-    Alexandra:
-    
+    remember to delete this at the end    
     Laina:
     Fix reset
     Fix Game Controller so that Deal or No Deal Round 8 shows

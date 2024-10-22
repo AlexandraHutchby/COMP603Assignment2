@@ -28,6 +28,8 @@ public class GameController {
     private boolean userCasePicked;
     private int casesRemaining;
     private FinalRoundController finalRound;
+    private boolean reset = false;
+    private double price;
 
     public GameController(CasesModel cases, GameView view, BankOfferController bankOfferController, Color gold, UserCaseModel userCase, FinalRoundController finalRound) {
         this.cases = cases;
@@ -56,19 +58,18 @@ public class GameController {
         for (int i = 0; i < caseButtons.size(); i++) {
             int caseIndex = i + 1;
             JButton caseButton = caseButtons.get(i);
-            double price = cases.getPrice(caseIndex);
-            casesOpened[caseIndex - 1] = price;
+            setPrice(caseIndex);
             caseButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (userCasePicked) {
                         if (caseIndex != userCase.getUserCaseNumber()) {
-                            caseButton.setText("$ " + price);
+                            caseButton.setText("$ " + casesOpened[caseIndex -1]);
                             caseButton.setBackground(Color.DARK_GRAY);
                             caseButton.setForeground(Color.WHITE);
 
                             for (JButton priceButton : priceButtons) {
-                                if (priceButton.getText().equals("$ " + price)) {
+                                if (priceButton.getText().equals("$ " + casesOpened[caseIndex - 1])) {
                                     priceButton.setBackground(Color.BLACK);
                                     priceButton.setForeground(Color.GRAY);
                                 }
@@ -120,6 +121,10 @@ public class GameController {
         view.getPlayAgainButton().addActionListener(e -> handleRestartPlayAgain());
         view.getBackToMainMenuButton().addActionListener(e -> handleRestartMainMenu());
     }
+    
+    private void setPrice(int caseNum){
+        casesOpened[caseNum - 1] = cases.getPrice(caseNum);
+    }
 
     private void goToFinalRound() {
         int userCaseNumber = userCase.getUserCaseNumber();
@@ -158,6 +163,7 @@ public class GameController {
         for(int i = 0; i < casesOpened.length; i++)
         {
             casesOpened[i] = cases.getPrice(i + 1);
+            setPrice(i+1);
         }
         
         view.resetGameView();   //reseting game view
