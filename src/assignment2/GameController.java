@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -177,8 +179,9 @@ public class GameController {
         
         casesOpenedThisRound  = 0;
         
+        view.updateRoundLabel("Select your case");
+        
         //updating view
-        view.updateRoundLabel(1);
         view.updateRemainingCasesLabel(rounds.getRemainingCasesThisRound()); 
         
     }
