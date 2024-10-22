@@ -36,6 +36,7 @@ public class LeaderboardController {
         view.getMenu().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                database.closeDatabase();
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                 cardLayout.show(view.getParent(), "menuPanel");
             }
@@ -44,6 +45,7 @@ public class LeaderboardController {
         view.getStart().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                database.closeDatabase();
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                 cardLayout.show(view.getParent(), "gamePanel");
             }

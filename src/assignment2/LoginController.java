@@ -39,8 +39,10 @@ public class LoginController {
                     leaderboardDatabase.insertScoresInLeaderboard(username);
                     CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                     cardLayout.show(view.getParent(), "instructionsPanel");
+                    database.closeDatabase();
                 }else if(database.checkUsernameAndPassword(username, password)){
                     leaderboardDatabase.setCurrentUsername(username);
+                    database.closeDatabase();
                     CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                     cardLayout.show(view.getParent(), "menuPanel");
                 }else{
