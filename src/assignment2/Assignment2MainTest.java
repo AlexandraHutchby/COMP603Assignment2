@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
  *
  * @author laina
  */
-public class mainTest 
+public class Assignment2MainTest 
 {
     private static JPanel mainPanel;
     private static CardLayout cardLayout;

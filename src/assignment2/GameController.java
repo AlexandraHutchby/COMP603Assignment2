@@ -65,7 +65,7 @@ public class GameController {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (userCasePicked) {
-                        if (caseIndex != userCase.getUserCaseNumber()) {
+                        if (caseIndex != userCase.getUserCaseNumber() && casesOpened[caseIndex - 1] != 0) {
                             caseButton.setText("$ " + casesOpened[caseIndex -1]);
                             caseButton.setBackground(Color.DARK_GRAY);
                             caseButton.setForeground(Color.WHITE);
@@ -76,7 +76,6 @@ public class GameController {
                                     priceButton.setForeground(Color.GRAY);
                                 }
                             }
-                            if (casesOpened[caseIndex - 1] != 0) {
                                 casesOpened[caseIndex - 1] = 0;
                                 //Open the case in current round andupdate the cases remaing label
                                 rounds.updateRemainingCases();
@@ -91,7 +90,6 @@ public class GameController {
                                 if (casesRemaining == 2) {
                                     goToFinalRound();
                                 }
-                            }
 
                         }
                     } else {

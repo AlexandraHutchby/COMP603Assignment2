@@ -84,7 +84,7 @@ public class LeaderboardView extends JPanel {
         scoresTable = new JTable(tableModel);
 
         scoresTable.setFillsViewportHeight(true);
-        scoresTable.setRowHeight(25);
+        scoresTable.setRowHeight(40);
         scoresTable.setFont(new Font("Arial", Font.PLAIN, 20));
 
         scoresTable.getTableHeader().setBackground(Color.BLACK);
