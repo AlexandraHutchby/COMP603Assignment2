@@ -1,17 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment2;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.Set;
+
 /**
- *
+ * This class models the cases.
+ * It assigns random values to numbered cases, and manages the state of those.
+ * It provides methods for retrieving the case values and reseting
  * @author Alexandra and Laina
  */
 

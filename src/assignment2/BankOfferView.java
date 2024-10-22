@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package assignment2;
 
 import java.awt.BorderLayout;
@@ -14,29 +11,29 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 /**
- *
- * @author Alexandra
+ * This represents the view for the banker offer screen in the game
+ * It displays the bankers offer and provides buttons for the player
+ * to accept or decline. 
+ * @author Alexandra + Laina
  */
 public class BankOfferView extends JPanel{
     private JLabel bankerOfferLabel;
     private JButton deal;
     private JButton noDeal;
     
+    //Constructor to set up the view 
     public BankOfferView(Color gold, JPanel mainPanel, CardLayout cardLayout){ 
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         bankerOfferLabel = new JLabel("..", SwingConstants.CENTER);
-        
         heading(gold);
-        
         offer(gold);
-        
         buttonsPanel();
     }
     
+    //Creates and adds the heading label to view
     public void heading(Color gold){
         
         //Creating heading
@@ -44,10 +41,10 @@ public class BankOfferView extends JPanel{
         heading.setFont(new Font("Broadway", Font.BOLD, 50));
         heading.setForeground(gold);
        
-        
         add(heading, BorderLayout.NORTH);
     }
     
+    //Sets up bankers offer label in the center of view
     public void offer(Color gold){
         bankerOfferLabel.setText("$ ");
         bankerOfferLabel.setFont(new Font("Arial", Font.PLAIN, 45));
@@ -55,6 +52,7 @@ public class BankOfferView extends JPanel{
         add(bankerOfferLabel, BorderLayout.CENTER);
     }
     
+    //Sets up button panel with deal or no deal buttons, uses grid layout
     public void buttonsPanel(){
         //panel for the deal or no deal
         JPanel dealOrNoDeal = new JPanel();
@@ -80,6 +78,7 @@ public class BankOfferView extends JPanel{
         add(dealOrNoDeal, BorderLayout.SOUTH);
     }
     
+    //get functions for returning buttons interacting with controller
     public JButton getDeal(){
         return deal;
     }
@@ -88,6 +87,7 @@ public class BankOfferView extends JPanel{
         return noDeal;
     }
     
+    //returns label used to display bankers offer
     public JLabel getOfferLabel(){
         return bankerOfferLabel;
     }

@@ -1,11 +1,11 @@
 package assignment2;
 
-import java.util.Collection;
 import java.util.Scanner;
 
 /**
- *
- * @author Laina and Alexandra
+ * This class represents the model responible for calculating bankers offer.
+ * It determins the offer based on the remaining values in the unopened cases 
+ * @author Alexandra + Laina
  */
 public class BankOfferModel 
 {    
@@ -14,35 +14,23 @@ public class BankOfferModel
     {
         int sum = 0;
         int size = 0;
+        //looops through all remaining cases and add case values to sum
         for(double values : remainingValues)
         {
             sum += values;
-            if(values != 0){
+            if(values != 0){    //only counts non zero values(unopened cases)
                 size++;
             }
         }
+        //returns 0 is there are no values or all remaining cases have been opened
         if(sum == 0){
             return 0;
         }else if(size == 0){
             return 0;
         }
+        //calulates offer as half the average sum of remaining cases
         int offer = (sum/size) / 2;
         return offer;
-    }
-    
-    //Asks player if they want to accept the bank offer
-    public boolean dealOrNoDeal(int offer, Scanner scan){
-        System.out.println("Do you accept the bankers offer (y or n): ");
-        String response = scan.nextLine();
-        if(response.equalsIgnoreCase("y"))
-        {
-            System.out.println("Congratulations, you have accepted the Banks offer of $" + offer);
-            return false;
-        } else //if any key is selected other than 'y' we have assumed that the player wants to continue with the game
-        {
-            System.out.println("You have declined the banks offer, continue game");
-            return true;
-        }
     }
 }
 
