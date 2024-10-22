@@ -1,47 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment2;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 /**
- *
- * @author laina
+ * displays instructions for game and includes navigation buttons
+ * @author Alexandra and Laina
  */
 public class InstructionsView extends JPanel
 {
+    //navigation buttons for menu and satarting game
     private JButton menu;
     private JButton start;
-    public InstructionsView(Color gold, JPanel mainPanel, CardLayout cardLayout)
+    
+    //constructor
+    public InstructionsView(Color gold)
     {
         //Setting background
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         
+        //creating heading and adding instrcutions and buttons
         createHeading(gold);
         addInstructions(gold);
         createButtons(gold);     
 
     }
     
+    //creates heading
     private void createHeading(Color gold){
         //Creating heading
         JLabel header = new JLabel("How to play:", SwingConstants.CENTER);
@@ -50,6 +46,7 @@ public class InstructionsView extends JPanel
         add(header, BorderLayout.NORTH);
     }
     
+    //add the instructions text area
     private void addInstructions(Color gold){
         //Area for instructions
         JTextArea howTo = new JTextArea();
@@ -66,8 +63,9 @@ public class InstructionsView extends JPanel
         add(howTo, BorderLayout.CENTER);
     }
     
+    //creating navigation buttons
     private void createButtons(Color gold){
-        //Buttons
+        //Buttons panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setLayout(new BorderLayout());
@@ -89,21 +87,23 @@ public class InstructionsView extends JPanel
         add(buttonPanel, BorderLayout.SOUTH);
     }
     
+    //loading instructions from specified file
     private static String loadInstructionsFromFile(String filePath) 
     {
-        StringBuilder instructions = new StringBuilder();
+        StringBuilder instructions = new StringBuilder(); //holds instructions
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 instructions.append(line).append("\n"); // Append each line to the StringBuilder
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();    //printing stacktrace if there is an error
             instructions.append("Error loading instructions."); // Show error message if file cannot be read
         }
         return instructions.toString();
     }
     
+    //get methods
     public JButton getMenu(){
         return this.menu;
     }

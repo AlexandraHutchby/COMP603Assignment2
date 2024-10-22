@@ -57,8 +57,8 @@ public class Assignment2MainTest
         BankOfferModel bankOfferModel = new BankOfferModel();
         BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c, endView, leaderboardDatabase);
         
-        GameView gameView = new GameView(gold, mainPanel, cardLayout);
-        FinalRoundView finalRoundView = new FinalRoundView(gold, mainPanel, cardLayout);
+        GameView gameView = new GameView(gold);
+        FinalRoundView finalRoundView = new FinalRoundView(gold);
         
         FinalRoundController finalRoundController = new FinalRoundController(finalRoundView, endView, c, leaderboardDatabase);
         GameController controller = new GameController(c, gameView, bankOfferController, gold, userCase, finalRoundController);
@@ -68,7 +68,7 @@ public class Assignment2MainTest
         MenuView menuView = new MenuView(gold, mainPanel, cardLayout);
         MenuController menuController = new MenuController(menuView);
         
-        InstructionsView instructionsView = new InstructionsView(gold, mainPanel, cardLayout);
+        InstructionsView instructionsView = new InstructionsView(gold);
         InstructionsController instructionsController = new InstructionsController(instructionsView);
         
         

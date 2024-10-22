@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment2;
 
 import java.awt.CardLayout;
@@ -9,20 +5,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
- * @author Alexandra
+ * manages the interaction between the instruction view and game panels
+ * it handles user actions in the instuctions view and switches between 
+ * different panels
+ * @author Alexandra and Laina
  */
 public class InstructionsController {
 
     private InstructionsView view;
 
+    //constructor to initizlise the view nad setip listeenrs
     public InstructionsController(InstructionsView view) {
         this.view = view;
-
         setupListeners();
     }
 
     private void setupListeners() {
+        //action listener for menu button
         view.getMenu().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
