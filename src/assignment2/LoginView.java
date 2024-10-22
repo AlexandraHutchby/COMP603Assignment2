@@ -98,6 +98,7 @@ public class LoginView extends JPanel
     
     public void addUsernameUsed(){
         usernameUsed.setForeground(gold);
+        usernameUsed.setFont(new Font("Arial", Font.BOLD, 36));
         add(usernameUsed, BorderLayout.SOUTH);
         this.repaint();
         this.revalidate();

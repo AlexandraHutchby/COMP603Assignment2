@@ -35,7 +35,7 @@ public class FinalRoundView extends JPanel{
         
         select(gold);
         
-        casesPanel();
+        casesPanel(gold);
     }
     
     private void heading(Color gold){
@@ -56,7 +56,7 @@ public class FinalRoundView extends JPanel{
         add(selectCaseLabel, BorderLayout.CENTER);
     }
     
-    private void casesPanel(){
+    private void casesPanel(Color gold){
         //panel for the cases
         JPanel casesPanel = new JPanel();
         casesPanel.setBackground(Color.BLACK);
@@ -66,7 +66,7 @@ public class FinalRoundView extends JPanel{
         case1 = new JButton("Case ");
         case1.setFont(new Font("Arial", Font.PLAIN, 18));
         case1.setForeground(Color.BLACK);
-        case1.setBackground(Color.GREEN);
+        case1.setBackground(gold);
         case1.setPreferredSize(new Dimension(100, 50));
         casesPanel.add(case1);
         
@@ -75,7 +75,7 @@ public class FinalRoundView extends JPanel{
         case2 = new JButton("Case " );
         case2.setFont(new Font("Arial", Font.PLAIN, 18));
         case2.setForeground(Color.BLACK);
-        case2.setBackground(Color.RED);
+        case2.setBackground(gold);
         case2.setPreferredSize(new Dimension(100, 50));
         casesPanel.add(case2);
         
