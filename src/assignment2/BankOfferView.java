@@ -24,7 +24,7 @@ public class BankOfferView extends JPanel{
     private JButton noDeal;
     
     //Constructor to set up the view 
-    public BankOfferView(Color gold, JPanel mainPanel, CardLayout cardLayout){ 
+    public BankOfferView(Color gold){ 
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         bankerOfferLabel = new JLabel("..", SwingConstants.CENTER);

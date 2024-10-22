@@ -51,9 +51,9 @@ public class Assignment2MainTest
         LoginDatabase loginDatabase = new LoginDatabase();
         LoginController loginController = new LoginController(loginDatabase, loginView, leaderboardDatabase);
         
-        EndView endView = new EndView(gold, mainPanel, cardLayout);
+        EndView endView = new EndView(gold);
 
-        BankOfferView bankOfferView = new BankOfferView(gold, mainPanel, cardLayout);
+        BankOfferView bankOfferView = new BankOfferView(gold);
         BankOfferModel bankOfferModel = new BankOfferModel();
         BankOfferController bankOfferController = new BankOfferController(bankOfferView, bankOfferModel, c, endView, leaderboardDatabase);
         

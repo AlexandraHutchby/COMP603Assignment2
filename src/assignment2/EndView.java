@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment2;
 
 import java.awt.BorderLayout;
@@ -11,14 +7,14 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
- *
- * @author laina
+ * this class is the visual for the end screen view of the players winnings 
+ * and provides options to play again or return to main menu
+ * @author Alexandra and Laina
  */
 public class EndView extends JPanel
 {
@@ -26,18 +22,21 @@ public class EndView extends JPanel
     private JButton playAgain;
     private JButton menu;
     
-    public EndView(Color gold, JPanel mainPanel, CardLayout cardLayout)
+    //Constructor for componets of the class
+    public EndView(Color gold)
     {
         //Setting Background
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         finalWinTotal = new JLabel("..", SwingConstants.CENTER);
         
+        //Adding heading, final win total and button panel
         heading(gold);
         finalWin(gold);
         buttonPanel(gold);
     }
     
+    //Creates and adds heading to view, displays congragualtions messages
     private void heading(Color gold)
     {
         JLabel congrats = new JLabel("CONGRATULATIONS!", SwingConstants.CENTER);
@@ -53,24 +52,29 @@ public class EndView extends JPanel
         headingPanel.setLayout(new BoxLayout(headingPanel, BoxLayout.Y_AXIS)); 
         headingPanel.setBackground(Color.BLACK); 
         
+        //adds labels to the heading
         headingPanel.add(congrats);
         headingPanel.add(youWon);
+        
         // Align the labels within the panel
         congrats.setAlignmentX(Component.CENTER_ALIGNMENT);
         youWon.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+        //adds heading panel to top of main panel
         add(headingPanel, BorderLayout.NORTH);
     }
     
+    //creates and displays players final winnings
     private void finalWin(Color gold)
     {
-        //INSERT FINAL CASE THINGS
+        //sets up final winings label
         finalWinTotal.setText("$ ");
         finalWinTotal.setFont(new Font("Arial", Font.PLAIN, 45));
         finalWinTotal.setForeground(gold);
         add(finalWinTotal, BorderLayout.CENTER);
     }
     
+    //Creates and adds button panel for play again and main menu buttons
     private void buttonPanel(Color gold)
     {
         JPanel buttonPanel = new JPanel();
@@ -91,9 +95,11 @@ public class EndView extends JPanel
         menu.setBackground(gold);
         buttonPanel.add(menu, BorderLayout.EAST);
         
+        //adds button panel to bottom of the main panel
         add(buttonPanel, BorderLayout.SOUTH);
     }
     
+    //gets and sets 
     public void setWinTotal(double winning){
         finalWinTotal.setText("$ "+winning);
     }
