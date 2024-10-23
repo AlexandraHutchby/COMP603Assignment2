@@ -65,7 +65,7 @@ public class Assignment2MainTest {
 
         EndController endController = new EndController(endView, controller);
 
-        MenuView menuView = new MenuView(gold, mainPanel, cardLayout);
+        MenuView menuView = new MenuView(gold);
         MenuController menuController = new MenuController(menuView);
 
         InstructionsView instructionsView = new InstructionsView(gold);

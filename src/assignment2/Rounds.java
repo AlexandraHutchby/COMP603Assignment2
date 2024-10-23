@@ -1,22 +1,26 @@
+
 package assignment2;
 
 /**
- *
- * @author Laina and Alexandra
+ * This function manages the game's round progression, tracking how many cases need to be opened per round
+ * advancing to the next round, and resetting the rounds when needed
+ * 
+ * @author Alexandra and Laina
  */
 public class Rounds 
 {
-    private int currentRound;
-    private int remainingCasesThisRound;
+    private int currentRound; //round number
+    private int remainingCasesThisRound; //remaining cases that round
     private int[] casesToOpen;
     
     public Rounds(int totalCases) 
     {
         this.currentRound = 1; // Starting from round 1
         this.casesToOpen = new int[] {6, 5, 4, 3, 2, 2, 1, 1}; //Initial array to show how many cases are open per round
-        this.remainingCasesThisRound  = casesToOpen[0];
+        this.remainingCasesThisRound  = casesToOpen[0]; //round 1 cases to be removed
     }
     
+    //returns the amount of cases to be opened that round
     public int casesToOpenPerRound()
     {
        if(currentRound - 1 <casesToOpen.length)
@@ -39,6 +43,7 @@ public class Rounds
         return false;
     }
     
+    //updates the remaining cases by reducing it by 1
     public void updateRemainingCases() 
     {
         if (remainingCasesThisRound  > 0) 

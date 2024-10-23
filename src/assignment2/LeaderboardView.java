@@ -1,18 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package assignment2;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,24 +12,24 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 /**
- *
- * @author laina
+ * This function creates the visual component for displaying a leaderboard.
+ * 
+ * @author Alexandra and Laina
  */
 public class LeaderboardView extends JPanel {
 
-    private Color gold;
+    private Color gold; //colour used for GUI elements
 
-    private JButton menu;
-    private JButton start;
+    private JButton menu; //button for main menu
+    private JButton start; //button for new game
 
-    private JTable scoresTable;
-    private DefaultTableModel tableModel;
-    private JPanel scoresPanel;
+    private JTable scoresTable; //Table for the user scores
+    private DefaultTableModel tableModel; //Model for the scoresTable - managing the data it displays
+    private JPanel scoresPanel; //panel containing the scores table
 
-    public LeaderboardView(Color gold, JPanel mainPanel, CardLayout cardLayout) {
+    public LeaderboardView(Color gold) {
         this.gold = gold;
         //Setting background
         setBackground(Color.BLACK);
@@ -49,12 +41,12 @@ public class LeaderboardView extends JPanel {
         header.setForeground(gold);
         add(header, BorderLayout.NORTH);
 
-        createButtons();
-        createScores();
+        createButtons(); //creates the buttons
+        createScores(); //creates the scores
     }
 
     private void createButtons() {
-        //Buttons
+        //Buttons panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setLayout(new BorderLayout());
@@ -77,25 +69,22 @@ public class LeaderboardView extends JPanel {
     }
 
     private void createScores() {
+        //Scores panel
         scoresPanel = new JPanel(new BorderLayout());
         scoresPanel.setBackground(Color.BLACK);
 
+        //Creating the scores table
         tableModel = new DefaultTableModel(new Object[]{"Username", "Score"}, 0);
         scoresTable = new JTable(tableModel);
-
         scoresTable.setFillsViewportHeight(true);
         scoresTable.setRowHeight(40);
         scoresTable.setFont(new Font("Arial", Font.PLAIN, 20));
-
         scoresTable.getTableHeader().setBackground(Color.BLACK);
         scoresTable.getTableHeader().setForeground(gold);
-
+        
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-
         renderer.setBackground(Color.BLACK);
-
         renderer.setForeground(gold);
-
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
 
         for (int i = 0;i < scoresTable.getColumnCount(); i++) {
@@ -107,6 +96,7 @@ public class LeaderboardView extends JPanel {
         add(scoresPanel, BorderLayout.CENTER);
     }
 
+    //this function updates the scores table with the data - clears exisitng rows
     public void updateScores(List<String> scores) {
         tableModel.setRowCount(0);
         for (String score : scores) {
@@ -117,10 +107,12 @@ public class LeaderboardView extends JPanel {
         scoresPanel.repaint();
     }
 
+    //returns menu button
     public JButton getMenu() {
         return menu;
     }
 
+    //returns the start button
     public JButton getStart() {
         return start;
     }

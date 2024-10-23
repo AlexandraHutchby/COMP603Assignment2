@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package assignment2;
 
 import java.sql.Connection;
@@ -14,27 +11,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Alexandra
+ *This function encapsulates the logic for managing leaderboard data including user score
+ * insertion, updating and retrieving scores.
+ * @author Alexandra and Laina
  */
 public class LeaderboardDatabase {
 
-    private final String USER_NAME = "COMP603Group10";
-    private final String PASSWORD = "group10";
-    private final String dbURL = "jdbc:derby://localhost:1527/LeaderboardDB; create =true";
-    private Connection conn;
-    private Statement statement;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
-    private String currentUsername;
+    private final String USER_NAME = "COMP603Group10"; //username for database connection
+    private final String PASSWORD = "group10"; //password for database connection
+    private final String dbURL = "jdbc:derby://localhost:1527/LeaderboardDB; create =true"; //url for database connection
+    
+    private Connection conn; //represents the connection to the database
+    private Statement statement; //used to execute the SQL queries
+    private PreparedStatement preparedStatement; //executes parameterised queries
+    private ResultSet resultSet; //holds the data returned from a SQL query
+    private String currentUsername; //stores the current user's username
 
+    //initialises the database leaderboard
     public LeaderboardDatabase() {
-        connectToDatabase();
-        createLeaderboardTable();
+        connectToDatabase(); //connects to the database
+        createLeaderboardTable(); //creates teh leaderboard if not already made
         insertScoresInLeaderboard(currentUsername);
-        retrieveLeaderboard();
+        retrieveLeaderboard(); //get the leaderboard
     }
 
+    //this function connects to the database
     private void connectToDatabase() {
         try {
             conn = DriverManager.getConnection(dbURL, USER_NAME, PASSWORD);
@@ -44,7 +45,8 @@ public class LeaderboardDatabase {
             System.out.println("SQLException in Leaderboard Database");
         }
     }
-
+    
+    //this function closes the database
     public void closeDatabase() {
         try {
             if (conn != null) {
@@ -55,6 +57,7 @@ public class LeaderboardDatabase {
         }
     }
 
+    //this function creates the leaderboard table
     private void createLeaderboardTable() {
         try {
             if (conn == null) {
@@ -71,10 +74,11 @@ public class LeaderboardDatabase {
 
             System.out.println("Leaderboard table created");
         } catch (SQLException e) {
-            System.out.println("SQLException in create table");
+            System.out.println("Leaderboard table already exists");
         }
     }
 
+    //this function inserts a new user into the leaderboard by making the score 0
     public void insertScoresInLeaderboard(String username) {
         try {
             if (conn == null) {
@@ -94,6 +98,7 @@ public class LeaderboardDatabase {
         }
     }
 
+    //this function updates the score if the new score is bigger than the current score
     public void updateScore(double newscore) {
         try {
             if (conn == null) {
@@ -113,6 +118,7 @@ public class LeaderboardDatabase {
         }
     }
 
+    //this function gets the current score of the user
     private double currentScore() {
         double currentScore = -1;
         try {
@@ -132,6 +138,7 @@ public class LeaderboardDatabase {
         return currentScore;
     }
 
+    //this function retrieves the leaderboard
     private void retrieveLeaderboard() {
         try {
             if (conn == null) {
@@ -151,6 +158,7 @@ public class LeaderboardDatabase {
         }
     }
 
+    //this function returns the top 10 scores to show in the leaderboard
     public List<String> getTopScores() {
         List<String> scores = new ArrayList<>();
         String query = "SELECT username, score FROM leaderboard ORDER BY score DESC FETCH FIRST 10 ROWS ONLY";
@@ -173,6 +181,7 @@ public class LeaderboardDatabase {
         return scores;
     }
     
+    //this function returns the current username
     public void setCurrentUsername(String username){
         currentUsername = username;
     }

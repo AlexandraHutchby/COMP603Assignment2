@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package assignment2;
 
 import java.sql.Connection;
@@ -12,24 +9,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * This function provides essential methods for user registration and login
+ * validation by managing database connections, creating necessary tables,
+ * inserting user credentials and checking for existing users
  *
- * @author laina
+ * @author Alexandra and Laina
  */
 public class LoginDatabase {
 
-    private final String USER_NAME = "COMP603Group10";
-    private final String PASSWORD = "group10";
-    private final String dbURL = "jdbc:derby://localhost:1527/LeaderboardDB; create =true";
-    private Connection conn;
-    private Statement statement;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
+    private final String USER_NAME = "COMP603Group10"; //username of the database
+    private final String PASSWORD = "group10"; //password of the database
+    private final String dbURL = "jdbc:derby://localhost:1527/LeaderboardDB; create =true"; //url of the database
 
+    private Connection conn; //Connection object used to communicate with the database
+    private Statement statement; //used to execute the SQL statements without parameters
+    private PreparedStatement preparedStatement; //used to execute the SQL statements with parameters
+    private ResultSet resultSet; //used to store the results of SQL queries
+
+    //initialised the login database
     public LoginDatabase() {
-        connectToDatabase();
-        createLoginTable();
+        connectToDatabase(); //establish a connection to the database
+        createLoginTable(); //creates a login table if it doesn't exist
     }
 
+    //function that connects to the database
     private void connectToDatabase() {
         try {
             conn = DriverManager.getConnection(dbURL, USER_NAME, PASSWORD);
@@ -39,6 +42,7 @@ public class LoginDatabase {
         }
     }
 
+    //function that closes the database connection
     public void closeDatabase() {
         try {
             if (conn != null) {
@@ -49,6 +53,7 @@ public class LoginDatabase {
         }
     }
 
+    //function that creates the login table
     private void createLoginTable() {
         try {
             if (conn == null) {
@@ -65,10 +70,11 @@ public class LoginDatabase {
 
             System.out.println("Login table created");
         } catch (SQLException e) {
-            System.out.println("SQLException in create table");
+            System.out.println("Login table already exists");
         }
     }
 
+    //adds a new username if the username doesn't exist
     public void insertUsername(String username, String password) {
         try {
             if (conn == null) {
@@ -88,6 +94,7 @@ public class LoginDatabase {
         }
     }
 
+    //checks that that the username and password matches the existing records
     public boolean checkUsernameAndPassword(String username, String password) {
         try {
             if (conn == null) {
@@ -106,9 +113,10 @@ public class LoginDatabase {
             return false;
         }
     }
-    
-    public boolean checkUsername(String username){
-                try {
+
+    //checks if the username already exists
+    public boolean checkUsername(String username) {
+        try {
             if (conn == null) {
                 connectToDatabase();
             }

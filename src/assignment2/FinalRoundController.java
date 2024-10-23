@@ -64,6 +64,7 @@ public class FinalRoundController {
     }
     
     //resets the case numbers to default state.
+    
     void reset() {
         //reset cases to default state
         userCase = -1;
@@ -80,5 +81,4 @@ public class FinalRoundController {
         view.getCase1().setEnabled(true);
         view.getCase2().setEnabled(true);
     }
-
 }
