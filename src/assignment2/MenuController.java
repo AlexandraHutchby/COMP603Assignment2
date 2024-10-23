@@ -1,4 +1,3 @@
-
 package assignment2;
 
 import java.awt.CardLayout;
@@ -7,7 +6,7 @@ import java.awt.event.ActionListener;
 
 /**
  * This function manages the interaction between the menu view and user actions
- * 
+ *
  * @author Alexandra and Laina
  */
 public class MenuController {

@@ -37,7 +37,7 @@ public class FinalRoundController {
         view.getCase1().setText("Case " + userCase);
         view.getCase2().setText("Case " + remainingCase);
     }
-    
+
     //sets ups action listeners
     private void setupListeners() {
         //listener for player selected case (case 1)
@@ -50,7 +50,7 @@ public class FinalRoundController {
                 cardLayout.show(view.getParent(), "endPanel");
             }
         });
-        
+
         //lister for remaining unopend case(case 2)
         view.getCase2().addActionListener(new ActionListener() {
             @Override
@@ -62,9 +62,8 @@ public class FinalRoundController {
             }
         });
     }
-    
+
     //resets the case numbers to default state.
-    
     void reset() {
         //reset cases to default state
         userCase = -1;

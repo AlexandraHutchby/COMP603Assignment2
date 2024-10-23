@@ -1,4 +1,3 @@
-
 package assignment2;
 
 import java.sql.Connection;
@@ -11,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *This function encapsulates the logic for managing leaderboard data including user score
- * insertion, updating and retrieving scores.
+ * This function encapsulates the logic for managing leaderboard data including
+ * user score insertion, updating and retrieving scores.
+ *
  * @author Alexandra and Laina
  */
 public class LeaderboardDatabase {
@@ -20,7 +20,7 @@ public class LeaderboardDatabase {
     private final String USER_NAME = "COMP603Group10"; //username for database connection
     private final String PASSWORD = "group10"; //password for database connection
     private final String dbURL = "jdbc:derby://localhost:1527/LeaderboardDB; create =true"; //url for database connection
-    
+
     private Connection conn; //represents the connection to the database
     private Statement statement; //used to execute the SQL queries
     private PreparedStatement preparedStatement; //executes parameterised queries
@@ -45,7 +45,7 @@ public class LeaderboardDatabase {
             System.out.println("SQLException in Leaderboard Database");
         }
     }
-    
+
     //this function closes the database
     public void closeDatabase() {
         try {
@@ -109,7 +109,7 @@ public class LeaderboardDatabase {
                 this.preparedStatement = conn.prepareStatement(updateSQL);
                 preparedStatement.setDouble(1, newscore);
                 preparedStatement.setString(2, currentUsername);
-                
+
                 preparedStatement.executeUpdate();
                 System.out.println("Score updated");
             }
@@ -129,7 +129,7 @@ public class LeaderboardDatabase {
             this.preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, currentUsername);
             resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 currentScore = resultSet.getDouble("score");
             }
         } catch (SQLException e) {
@@ -180,9 +180,9 @@ public class LeaderboardDatabase {
         }
         return scores;
     }
-    
+
     //this function returns the current username
-    public void setCurrentUsername(String username){
+    public void setCurrentUsername(String username) {
         currentUsername = username;
     }
 }

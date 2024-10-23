@@ -8,7 +8,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * The main class for the Deal or no Deal game
- * 
+ *
  * @author Alexandra and Laina
  */
 public class Assignment2MainTest {

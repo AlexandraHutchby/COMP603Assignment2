@@ -1,4 +1,3 @@
-
 package assignment2;
 
 import java.awt.BorderLayout;
@@ -15,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * This function creates the visual component for displaying a leaderboard.
- * 
+ *
  * @author Alexandra and Laina
  */
 public class LeaderboardView extends JPanel {
@@ -81,13 +80,13 @@ public class LeaderboardView extends JPanel {
         scoresTable.setFont(new Font("Arial", Font.PLAIN, 20));
         scoresTable.getTableHeader().setBackground(Color.BLACK);
         scoresTable.getTableHeader().setForeground(gold);
-        
+
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setBackground(Color.BLACK);
         renderer.setForeground(gold);
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
 
-        for (int i = 0;i < scoresTable.getColumnCount(); i++) {
+        for (int i = 0; i < scoresTable.getColumnCount(); i++) {
             scoresTable.getColumnModel().getColumn(i).setCellRenderer(renderer);
         }
 
