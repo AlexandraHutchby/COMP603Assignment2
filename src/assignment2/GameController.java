@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 /**
  * This class handles the game logic it manages cases, user interactions, rounds
- * and transitons between frames
+ * and transitions between frames
  *
  * @author Alexandra and Laina
  */
@@ -119,8 +119,10 @@ public class GameController {
         int remainingCase = 0;      //holds remaing case number
         //finds remaing case that has not been opened
         for (int i = 0; i < casesOpened.length; i++) {
-            if (i != userCaseNumber) {
+            if (i != (userCaseNumber-1)) {
                 if (casesOpened[i] != 0) {
+                    System.out.println(i);
+                    System.out.println(userCaseNumber);
                     remainingCase = i + 1;
                 }
             }

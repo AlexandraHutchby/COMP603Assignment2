@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
+ * This function encapsulates the logic for updating and managing the
+ * leaderboard display in response to user interactions
  *
  * @author Alexandra and Laina
  */

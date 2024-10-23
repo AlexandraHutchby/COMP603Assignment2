@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 /**
  * manages the interaction between the instruction view and game panels
- * it handles user actions in the instuctions view and switches between 
+ * it handles user actions in the instructions view and switches between 
  * different panels
  * @author Alexandra and Laina
  */

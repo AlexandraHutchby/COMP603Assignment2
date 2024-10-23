@@ -3,8 +3,8 @@ package assignment2;
 import java.util.Scanner;
 
 /**
- * This class represents the model responible for calculating bankers offer. It
- * determins the offer based on the remaining values in the unopened cases
+ * This class represents the model responsible for calculating bankers offer. It
+ * determines the offer based on the remaining values in the unopened cases
  *
  * @author Alexandra + Laina
  */

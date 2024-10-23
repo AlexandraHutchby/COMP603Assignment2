@@ -1,7 +1,6 @@
 package assignment2;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
- * This class represents the graphical uI for deal or no deal manages the
+ * This class represents the graphical UI for deal or no deal manages the
  * display of cases, prices and game state
  *
  * @author Alexandra and Laina
