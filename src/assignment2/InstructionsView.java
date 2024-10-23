@@ -1,7 +1,6 @@
 package assignment2;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.BufferedReader;
@@ -15,39 +14,39 @@ import javax.swing.SwingConstants;
 
 /**
  * displays instructions for game and includes navigation buttons
+ *
  * @author Alexandra and Laina
  */
-public class InstructionsView extends JPanel
-{
+public class InstructionsView extends JPanel {
+
     //navigation buttons for menu and satarting game
     private JButton menu;
     private JButton start;
-    
+
     //constructor
-    public InstructionsView(Color gold)
-    {
+    public InstructionsView(Color gold) {
         //Setting background
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
-        
+
         //creating heading and adding instrcutions and buttons
         createHeading(gold);
         addInstructions(gold);
-        createButtons(gold);     
+        createButtons(gold);
 
     }
-    
+
     //creates heading
-    private void createHeading(Color gold){
+    private void createHeading(Color gold) {
         //Creating heading
         JLabel header = new JLabel("How to play:", SwingConstants.CENTER);
         header.setFont(new Font("Broadway", Font.BOLD, 30));
         header.setForeground(gold);
         add(header, BorderLayout.NORTH);
     }
-    
+
     //add the instructions text area
-    private void addInstructions(Color gold){
+    private void addInstructions(Color gold) {
         //Area for instructions
         JTextArea howTo = new JTextArea();
         howTo.setFont(new Font("Ariel", Font.PLAIN, 18));
@@ -56,42 +55,41 @@ public class InstructionsView extends JPanel
         howTo.setLineWrap(true);
         howTo.setWrapStyleWord(true);
         howTo.setEditable(false);
-                
+
         //Load in text file
         String instructions = loadInstructionsFromFile("./resources/Instructions.txt");
         howTo.setText(instructions);
         add(howTo, BorderLayout.CENTER);
     }
-    
+
     //creating navigation buttons
-    private void createButtons(Color gold){
+    private void createButtons(Color gold) {
         //Buttons panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setLayout(new BorderLayout());
-        
+
         //Start Game button
         start = new JButton("Start Game");
         start.setFont(new Font("Arial", Font.BOLD, 18));
         start.setForeground(Color.BLACK);
         start.setBackground(gold);
         buttonPanel.add(start, BorderLayout.EAST);
-        
+
         //Main Menu Button
         menu = new JButton("Main Menu");
         menu.setFont(new Font("Arial", Font.BOLD, 18));
         menu.setForeground(Color.BLACK);
         menu.setBackground(gold);
         buttonPanel.add(menu, BorderLayout.WEST);
- 
+
         add(buttonPanel, BorderLayout.SOUTH);
     }
-    
+
     //loading instructions from specified file
-    private static String loadInstructionsFromFile(String filePath) 
-    {
+    private static String loadInstructionsFromFile(String filePath) {
         StringBuilder instructions = new StringBuilder(); //holds instructions
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try ( BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 instructions.append(line).append("\n"); // Append each line to the StringBuilder
@@ -102,13 +100,13 @@ public class InstructionsView extends JPanel
         }
         return instructions.toString();
     }
-    
+
     //get methods
-    public JButton getMenu(){
+    public JButton getMenu() {
         return this.menu;
     }
-    
-    public JButton getStart(){
+
+    public JButton getStart() {
         return this.start;
     }
 }

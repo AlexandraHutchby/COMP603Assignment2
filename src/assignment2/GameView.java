@@ -12,8 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
- * This class represents the graphical uI for deal or no deal
- * manages the display of cases, prices and game state
+ * This class represents the graphical uI for deal or no deal manages the
+ * display of cases, prices and game state
+ *
  * @author Alexandra and Laina
  */
 public class GameView extends JPanel {
