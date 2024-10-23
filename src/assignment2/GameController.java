@@ -120,7 +120,7 @@ public class GameController {
         //finds remaing case that has not been opened
         for (int i = 0; i < casesOpened.length; i++) {
             if (i != userCaseNumber) {
-                if (casesOpened[i] == 0) {
+                if (casesOpened[i] != 0) {
                     remainingCase = i + 1;
                 }
             }

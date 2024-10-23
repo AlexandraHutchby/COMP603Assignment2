@@ -56,7 +56,7 @@ public class FinalRoundController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 endView.setWinTotal(casesModel.getPrice(remainingCase));
-                leaderboardDatabase.updateScore(casesModel.getPrice(userCase));
+                leaderboardDatabase.updateScore(casesModel.getPrice(remainingCase));
                 CardLayout cardLayout = (CardLayout) view.getParent().getLayout();
                 cardLayout.show(view.getParent(), "endPanel");
             }
