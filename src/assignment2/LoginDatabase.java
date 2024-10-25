@@ -18,7 +18,7 @@ public class LoginDatabase {
 
     private final String USER_NAME = "COMP603Group10"; //username of the database
     private final String PASSWORD = "group10"; //password of the database
-    private final String dbURL = "jdbc:derby://localhost:1527/LeaderboardDB; create =true"; //url of the database
+    private final String dbURL = "jdbc:derby:LeaderboardDB_Ebd; create =true"; //url of the database
 
     private Connection conn; //Connection object used to communicate with the database
     private Statement statement; //used to execute the SQL statements without parameters

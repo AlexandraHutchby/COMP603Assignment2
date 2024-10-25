@@ -19,7 +19,7 @@ public class LeaderboardDatabase {
 
     private final String USER_NAME = "COMP603Group10"; //username for database connection
     private final String PASSWORD = "group10"; //password for database connection
-    private final String dbURL = "jdbc:derby://localhost:1527/LeaderboardDB; create =true"; //url for database connection
+    private final String dbURL = "jdbc:derby:LeaderboardDB_Ebd; create =true"; //url for database connection
 
     private Connection conn; //represents the connection to the database
     private Statement statement; //used to execute the SQL queries
@@ -31,7 +31,6 @@ public class LeaderboardDatabase {
     public LeaderboardDatabase() {
         connectToDatabase(); //connects to the database
         createLeaderboardTable(); //creates teh leaderboard if not already made
-        insertScoresInLeaderboard(currentUsername);
         retrieveLeaderboard(); //get the leaderboard
     }
 
