@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- *
+ *This file was created when we added the database xml file 
  * @author Alexandra
  */
 @Entity
